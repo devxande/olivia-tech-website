@@ -318,6 +318,67 @@ a:hover { color: var(--purple-700); }
   line-height: var(--leading-relaxed);
 }
 
+/* ---------- Como funciona ---------- */
+.howto__inner { display: flex; flex-direction: column; gap: var(--space-8); }
+.howto__head { display: flex; flex-direction: column; gap: 12px; max-width: 640px; }
+.howto__lead {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+.howto__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  text-align: center;
+}
+.howto__cta-note {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+.howto__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+.step-card {
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+.step-card__num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-lg);
+  color: var(--color-accent-strong);
+}
+.step-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+  letter-spacing: var(--tracking-tight);
+}
+.step-card__desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
 /* ---------- Availability section ---------- */
 .availability-section__inner {
   max-width: 820px;
@@ -552,6 +613,7 @@ textarea.field__control { resize: vertical; }
 @media (max-width: 900px) {
   .hero__title { font-size: var(--text-4xl); }
   .services__grid { grid-template-columns: repeat(2, 1fr); }
+  .howto__grid { grid-template-columns: repeat(3, 1fr); }
   .about__inner,
   .contact__inner { grid-template-columns: 1fr; gap: var(--space-10); }
   .navbar__links { display: none; }
@@ -559,6 +621,7 @@ textarea.field__control { resize: vertical; }
 
 @media (max-width: 560px) {
   .services__grid { grid-template-columns: 1fr; }
+  .howto__grid { grid-template-columns: 1fr; }
   .form__row { grid-template-columns: 1fr; }
   .hero__title { font-size: var(--text-3xl); }
   .section, .section--compact { padding-left: var(--container-pad); padding-right: var(--container-pad); }
