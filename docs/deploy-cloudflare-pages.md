@@ -25,19 +25,28 @@ O projeto não usa Node, React, bundler ou pré-processador. Os arquivos já est
 
 ## Passo a passo — GitHub
 
-1. Crie um repositório novo no GitHub (ex.: `olivia-tech-site`), pode ser **privado**.
-2. Na pasta do projeto (`E:\Olivia Tech`), inicialize o Git e envie os arquivos:
+> **Status atual:** o repositório já existe em
+> `https://github.com/devxande/olivia-tech-website` com a branch `main`
+> e o `index.html` na raiz. Os passos abaixo ficam como referência para
+> reproduzir o fluxo do zero em outro site.
+
+1. Crie um repositório novo no GitHub, pode ser **privado**.
+2. Na pasta do projeto, inicialize o Git e envie os arquivos:
 
    ```bash
    git init
    git add .
-   git commit -m "Primeira versão da home page da Olivia Tech"
+   git commit -m "Primeira versão do site"
    git branch -M main
-   git remote add origin https://github.com/SEU-USUARIO/olivia-tech-site.git
+   git remote add origin https://github.com/SEU-USUARIO/SEU-REPO.git
    git push -u origin main
    ```
 
 3. Confirme no GitHub que o `index.html` aparece na **raiz** do repositório.
+
+> **Produção sai da `main`.** Trabalhe features em branches separados e faça
+> merge na `main` (via PR) quando prontos — só então o deploy de produção é
+> atualizado. Outros branches geram apenas *preview deployments*.
 
 ## Passo a passo — Cloudflare Pages
 
@@ -74,6 +83,22 @@ O domínio `oliviatech.com.br` está no Registro.br. Para apontá-lo ao Cloudfla
 3. A Cloudflare cria os registros DNS e o certificado HTTPS automaticamente.
 
 > HTTPS é provisionado pela Cloudflare sem custo. Não é necessário configurar certificado manualmente.
+
+### 4. Definir o domínio canônico (evitar conteúdo duplicado)
+1. Escolha uma versão principal — recomendado o apex `oliviatech.com.br`.
+2. Em **Rules → Redirect Rules**, crie um redirect 301 de `www.oliviatech.com.br`
+   para `https://oliviatech.com.br` (ou o inverso, se preferir o `www`).
+3. Assim o site responde por um único endereço canônico, sem duplicar conteúdo.
+
+## Verificação pós-deploy
+
+Depois do primeiro deploy (na URL `*.pages.dev` e, em seguida, no domínio próprio):
+
+- [ ] Home carrega com CSS, JS e ícones (Lucide) renderizados.
+- [ ] CTAs "Solicitar diagnóstico" rolam até a seção de contato.
+- [ ] Formulário: submit vazio bloqueia; envio válido abre o WhatsApp preenchido.
+- [ ] Console do navegador sem erros.
+- [ ] Acesso via HTTPS com o redirect canônico funcionando (`www` ↔ apex).
 
 ## Reutilizando este fluxo em outros sites
 
