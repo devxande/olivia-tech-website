@@ -41,6 +41,8 @@
   --color-accent: var(--cyan-500);
   --color-accent-strong: var(--cyan-600);
   --color-accent-tint: var(--cyan-100);
+  --color-danger: #C0392B;
+  --color-danger-tint: rgba(192, 57, 43, .12);
 
   /* Shadows */
   --shadow-color: 220 45% 8%;
