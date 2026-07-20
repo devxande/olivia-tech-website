@@ -50,15 +50,26 @@ O projeto não usa Node, React, bundler ou pré-processador. Os arquivos já est
 
 ## Passo a passo — Cloudflare Pages
 
-1. Acesse o painel da Cloudflare → **Workers & Pages** → **Create** → aba **Pages** → **Connect to Git**.
-2. Autorize o GitHub e selecione o repositório do site.
-3. Na tela de configuração de build, use:
-   - **Framework preset:** `None`
-   - **Production branch:** `main`
-   - **Build command:** *(vazio)*
-   - **Build output directory:** `/`
-4. Clique em **Save and Deploy**.
-5. Ao terminar, o site fica disponível em uma URL temporária `*.pages.dev`. Teste por ela antes de conectar o domínio.
+### Valores exatos para colar (tela de build)
+
+| Campo | Valor |
+|---|---|
+| **Project name** | `olivia-tech-website` |
+| **Production branch** | `main` |
+| **Framework preset** | `None` |
+| **Build command** | *(vazio)* |
+| **Build output directory** | `/` |
+| **Root directory** | *(vazio / raiz)* |
+| **Environment variables** | *(nenhuma)* |
+
+### Passos
+
+1. Acesse [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** → **Create** → aba **Pages** → **Connect to Git**.
+2. Clique em **Connect GitHub** e autorize a Cloudflare. Em *Repository access*, libere o `olivia-tech-website` (ou "All repositories").
+3. Selecione **`devxande/olivia-tech-website`** → **Begin setup**.
+4. Na tela de configuração de build, preencha os valores da tabela acima. O ponto principal: preset `None`, **sem** build command, output `/`.
+5. Clique em **Save and Deploy** (o primeiro build leva ~1 min).
+6. Ao terminar, o site fica em uma URL `https://olivia-tech-website.pages.dev`. **Teste por ela primeiro** (home, CTAs, formulário abrindo o WhatsApp) antes de conectar o domínio.
 
 > A cada `git push` na branch `main`, o Cloudflare Pages republica o site automaticamente.
 
@@ -77,6 +88,11 @@ O domínio `oliviatech.com.br` está no Registro.br. Para apontá-lo ao Cloudfla
 3. Substitua os nameservers atuais pelos **dois da Cloudflare**.
 4. Salve. A propagação pode levar de alguns minutos a algumas horas.
 
+> **Atenção:** trocar os nameservers move **todo o DNS** do domínio para a
+> Cloudflare. Se houver e-mail nesse domínio (registros MX) ou outros
+> registros ativos, anote-os antes e recrie-os na Cloudflare para não
+> derrubar esses serviços.
+
 ### 3. Vincular o domínio ao projeto Pages
 1. No projeto no Cloudflare Pages → aba **Custom domains** → **Set up a custom domain**.
 2. Adicione `oliviatech.com.br` e também `www.oliviatech.com.br`.
@@ -86,9 +102,11 @@ O domínio `oliviatech.com.br` está no Registro.br. Para apontá-lo ao Cloudfla
 
 ### 4. Definir o domínio canônico (evitar conteúdo duplicado)
 1. Escolha uma versão principal — recomendado o apex `oliviatech.com.br`.
-2. Em **Rules → Redirect Rules**, crie um redirect 301 de `www.oliviatech.com.br`
-   para `https://oliviatech.com.br` (ou o inverso, se preferir o `www`).
-3. Assim o site responde por um único endereço canônico, sem duplicar conteúdo.
+2. No domínio → **Rules → Redirect Rules → Create rule**:
+   - **If:** *Hostname* `equals` `www.oliviatech.com.br`
+   - **Then:** *Static redirect* → `https://oliviatech.com.br` → tipo **301**
+3. (Ou o inverso, se preferir o `www` como principal.)
+4. Assim o site responde por um único endereço canônico, sem duplicar conteúdo.
 
 ## Verificação pós-deploy
 
