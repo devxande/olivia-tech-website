@@ -447,6 +447,26 @@ a:hover { color: var(--purple-700); }
 }
 textarea.field__control { resize: vertical; }
 
+.field__control--error { border-color: var(--color-danger); }
+.field__control--error:focus {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px var(--color-danger-tint);
+}
+.field__error {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-danger);
+  min-height: 0;
+}
+
+.form__note {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
 .form__success {
   display: flex;
   flex-direction: column;
