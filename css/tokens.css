@@ -1,0 +1,109 @@
+/* Olivia Tech — Design tokens (colors, typography, spacing, effects) */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Palette */
+  --purple-950: #120a1c;
+  --purple-900: #1E1230;
+  --purple-800: #2A1B40;
+  --purple-700: #3B2160;
+  --purple-600: #4F2C82;
+  --purple-500: #6B3FA0;
+  --purple-100: #EDE7F5;
+  --purple-50:  #F6F3FA;
+  --cyan-600: #2FA9B2;
+  --cyan-500: #4FD8E0;
+  --cyan-100: #DEFAFB;
+  --graphite-900: #17171B;
+  --graphite-800: #2A2A30;
+  --graphite-600: #55555E;
+  --graphite-400: #8A8A93;
+  --graphite-200: #DEDEE4;
+  --graphite-100: #F0F0F4;
+  --white: #FFFFFF;
+
+  /* Semantic colors */
+  --color-bg-page: var(--white);
+  --color-bg-section-alt: var(--purple-50);
+  --color-bg-brand: var(--purple-900);
+  --color-bg-brand-strong: var(--purple-950);
+  --color-surface-card: var(--white);
+  --color-surface-card-dark: var(--purple-800);
+  --color-text-primary: var(--graphite-900);
+  --color-text-muted: var(--graphite-600);
+  --color-text-inverse: var(--white);
+  --color-text-inverse-muted: rgba(246, 243, 250, .72);
+  --color-border: var(--graphite-200);
+  --color-border-dark: rgba(246, 243, 250, .14);
+  --color-brand: var(--purple-900);
+  --color-brand-hover: var(--purple-700);
+  --color-accent: var(--cyan-500);
+  --color-accent-strong: var(--cyan-600);
+  --color-accent-tint: var(--cyan-100);
+
+  /* Shadows */
+  --shadow-color: 220 45% 8%;
+  --shadow-sm: 0 1px 2px hsl(var(--shadow-color)/.06), 0 1px 1px hsl(var(--shadow-color)/.04);
+  --shadow-md: 0 8px 24px hsl(var(--shadow-color)/.10), 0 2px 6px hsl(var(--shadow-color)/.06);
+  --shadow-lg: 0 24px 60px hsl(var(--shadow-color)/.18), 0 8px 20px hsl(var(--shadow-color)/.08);
+  --shadow-glow-accent: 0 0 0 1px rgba(79,216,224,.25), 0 8px 30px rgba(79,216,224,.12);
+
+  /* Typography */
+  --font-display: 'Manrope', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 19px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 34px;
+  --text-4xl: 42px;
+  --text-5xl: 54px;
+  --text-6xl: 68px;
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+  --tracking-widest: 0.12em;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --space-40: 160px;
+  --container-max: 1200px;
+  --container-pad: 24px;
+
+  /* Effects */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+  --ease-standard: cubic-bezier(.4, 0, .2, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 240ms;
+  --duration-slow: 420ms;
+  --border-width: 1px;
+}
