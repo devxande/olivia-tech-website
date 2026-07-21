@@ -28,7 +28,133 @@
     });
 
     setupContactForm();
+    setupScrollProgress();
+    setupReveal();
+    setupHeroParallax();
+    setupNavbarState();
   });
+
+  // --- Interações visuais --------------------------------------------------
+
+  var prefersReducedMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Barra fina de progresso de rolagem no topo.
+  function setupScrollProgress() {
+    var bar = document.querySelector('.scroll-progress__bar');
+    if (!bar) return;
+
+    var ticking = false;
+    function update() {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - doc.clientHeight;
+      var ratio = max > 0 ? Math.min(window.pageYOffset / max, 1) : 0;
+      bar.style.transform = 'scaleX(' + ratio + ')';
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+
+  // Reveal ao rolar: a classe .reveal só é adicionada aqui, então sem JS
+  // o conteúdo permanece totalmente visível.
+  function setupReveal() {
+    var groups = [
+      { sel: '.services__head' },
+      { sel: '.service-card', stagger: 70 },
+      { sel: '.services__cta' },
+      { sel: '.about__intro' },
+      { sel: '.principle', stagger: 60 },
+      { sel: '.howto__head' },
+      { sel: '.step-card', stagger: 80 },
+      { sel: '.howto__cta' },
+      { sel: '.availability-section__inner' },
+      { sel: '.availability-card', stagger: 70 },
+      { sel: '.contact__intro' },
+      { sel: '.contact__card' }
+    ];
+
+    var targets = [];
+    groups.forEach(function (g) {
+      var nodes = document.querySelectorAll(g.sel);
+      nodes.forEach(function (node, i) {
+        node.classList.add('reveal');
+        if (g.stagger) node.style.setProperty('--reveal-delay', (i * g.stagger) + 'ms');
+        targets.push(node);
+      });
+    });
+
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      targets.forEach(function (t) { t.classList.add('is-visible'); });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+    targets.forEach(function (t) { observer.observe(t); });
+  }
+
+  // Parallax muito leve apenas nos elementos decorativos do hero.
+  function setupHeroParallax() {
+    if (prefersReducedMotion) return;
+    var hero = document.querySelector('.hero');
+    var glow = document.querySelector('.hero__glow');
+    var topo = document.querySelector('.hero__topology');
+    if (!hero || (!glow && !topo)) return;
+
+    var ticking = false;
+    function update() {
+      var offset = window.pageYOffset;
+      // só desloca enquanto o hero está visível
+      if (offset < hero.offsetHeight) {
+        if (glow) glow.style.setProperty('--glow-shift', (offset * 0.12) + 'px');
+        if (topo) topo.style.setProperty('--topo-shift', (offset * -0.06) + 'px');
+      }
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+  }
+
+  // Estado do navbar: sombra/opacidade ao sair do topo.
+  function setupNavbarState() {
+    var navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+
+    var ticking = false;
+    function update() {
+      navbar.classList.toggle('is-scrolled', window.pageYOffset > 8);
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+  }
 
   // --- Contact form -------------------------------------------------------
 

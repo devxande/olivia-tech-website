@@ -79,6 +79,9 @@
 </head>
 <body>
 
+  <!-- Barra de progresso de rolagem (decorativa) -->
+  <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
+
   <!-- Navbar -->
   <header class="navbar">
     <div class="navbar__inner">
@@ -101,10 +104,32 @@
 
   <!-- Hero -->
   <section class="hero" aria-label="Apresentação">
-    <div class="hero__glow"></div>
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__glow"></div>
+      <div class="hero__grid"></div>
+      <svg class="hero__topology" viewBox="0 0 520 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g class="link">
+          <path d="M70 120 L190 66" /><path d="M190 66 L310 120" /><path d="M70 120 L160 224" />
+          <path d="M160 224 L290 244" /><path d="M310 120 L290 244" /><path d="M310 120 L430 184" />
+          <path d="M290 244 L430 184" /><path d="M290 244 L360 348" /><path d="M160 224 L96 316" />
+          <path d="M96 316 L210 368" /><path d="M210 368 L360 348" /><path d="M430 184 L360 348" />
+        </g>
+        <circle class="node" cx="70"  cy="120" r="5.5" /><circle class="node-core" cx="70"  cy="120" r="2" />
+        <circle class="node" cx="190" cy="66"  r="5.5" /><circle class="node-core" cx="190" cy="66"  r="2" />
+        <circle class="node" cx="310" cy="120" r="6.5" /><circle class="node-core" cx="310" cy="120" r="2.4" />
+        <circle class="node" cx="160" cy="224" r="5.5" /><circle class="node-core" cx="160" cy="224" r="2" />
+        <circle class="node" cx="290" cy="244" r="7"   /><circle class="node-core" cx="290" cy="244" r="2.6" />
+        <circle class="node" cx="430" cy="184" r="5.5" /><circle class="node-core" cx="430" cy="184" r="2" />
+        <circle class="node" cx="360" cy="348" r="5.5" /><circle class="node-core" cx="360" cy="348" r="2" />
+        <circle class="node" cx="210" cy="368" r="5.5" /><circle class="node-core" cx="210" cy="368" r="2" />
+        <circle class="node" cx="96"  cy="316" r="5.5" /><circle class="node-core" cx="96"  cy="316" r="2" />
+      </svg>
+    </div>
     <div class="container hero__inner">
-      <span class="eyebrow eyebrow--accent">Consultoria de Infraestrutura de TI · Brasília</span>
-      <h1 class="hero__title">Infraestrutura de TI para empresas que não podem parar.</h1>
+      <span class="eyebrow eyebrow--accent eyebrow--live">
+        <span class="eyebrow__pulse"></span>Consultoria de Infraestrutura de TI · Brasília
+      </span>
+      <h1 class="hero__title">Infraestrutura de TI para empresas <span class="accent">que não podem parar.</span></h1>
       <p class="hero__lead">
         Atendimento consultivo em redes, Wi-Fi corporativo, firewall, servidores, backup, VPN, links e failover.
         Antes de qualquer proposta, um diagnóstico claro do que você já tem.
@@ -258,18 +283,18 @@
     </div>
   </section>
 
-  <div class="section-divider" aria-hidden="true"></div>
-
   <!-- Disponibilidade -->
-  <section class="section section--compact section--page" aria-label="Disponibilidade">
-    <div class="availability-section__inner">
-      <span class="eyebrow eyebrow--brand">Disponibilidade</span>
-      <h2 class="section-heading section-heading--2xl">Atendimento consultivo, com horário definido</h2>
-      <p class="availability-section__lead">
-        Atendemos de segunda a sexta a partir das 19h e, aos fins de semana, mediante agendamento.
-        Não é um plantão 24 horas: é uma agenda enxuta, pensada para dar atenção real a cada cliente
-        e conversar com calma sobre a sua operação.
-      </p>
+  <section class="section section--compact section--alt" aria-label="Disponibilidade">
+    <div class="section__inner availability-section__inner">
+      <div class="availability-section__header">
+        <span class="eyebrow eyebrow--brand">Disponibilidade</span>
+        <h2 class="section-heading section-heading--2xl">Atendimento consultivo, com horário definido</h2>
+        <p class="availability-section__lead">
+          Atendemos de segunda a sexta a partir das 19h e, aos fins de semana, mediante agendamento.
+          Não é um plantão 24 horas: é uma agenda enxuta, pensada para dar atenção real a cada cliente
+          e conversar com calma sobre a sua operação.
+        </p>
+      </div>
       <div class="availability-cards">
         <div class="availability-card">
           <span class="availability-card__label">Seg – Sex</span>

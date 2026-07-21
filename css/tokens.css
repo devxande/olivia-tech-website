@@ -108,4 +108,28 @@
   --duration-base: 240ms;
   --duration-slow: 420ms;
   --border-width: 1px;
+
+  /* ---- Aurora Técnica: efeitos e profundidade ---- */
+  --aurora-cyan: rgba(79, 216, 224, .16);
+  --aurora-purple: rgba(107, 63, 160, .42);
+  --aurora-deep: rgba(59, 33, 96, .55);
+  --grid-line: rgba(246, 243, 250, .045);
+  --grid-size: 46px;
+
+  /* Superfícies de vidro sobre o fundo escuro */
+  --glass-bg: rgba(34, 22, 56, .55);
+  --glass-bg-strong: rgba(34, 22, 56, .78);
+  --glass-border: rgba(246, 243, 250, .10);
+
+  /* Brilhos e sombras premium */
+  --glow-accent-soft: 0 0 24px rgba(79, 216, 224, .28);
+  --shadow-card-hover: 0 26px 50px -22px hsl(var(--shadow-color)/.40),
+                       0 10px 22px -12px hsl(var(--shadow-color)/.20);
+  --shadow-glow-card: 0 0 0 1px rgba(79, 216, 224, .28),
+                      0 24px 60px -18px rgba(79, 216, 224, .22);
+  --ring-accent: 0 0 0 3px rgba(79, 216, 224, .22);
+
+  /* Escala tipográfica estendida */
+  --text-7xl: 82px;
+  --tracking-tighter: -0.03em;
 }
