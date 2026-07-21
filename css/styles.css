@@ -186,6 +186,7 @@ a:hover { color: var(--purple-700); }
 
 /* ---------- Section shell ---------- */
 .section { padding: var(--space-24) var(--container-pad); }
+.section[id] { scroll-margin-top: 80px; }
 .section--alt { background: var(--color-bg-section-alt); }
 .section--page { background: var(--color-bg-page); }
 .section--brand { background: var(--color-bg-brand); }
@@ -613,7 +614,7 @@ textarea.field__control { resize: vertical; }
 @media (max-width: 900px) {
   .hero__title { font-size: var(--text-4xl); }
   .services__grid { grid-template-columns: repeat(2, 1fr); }
-  .howto__grid { grid-template-columns: repeat(3, 1fr); }
+  .howto__grid { grid-template-columns: 1fr; }
   .about__inner,
   .contact__inner { grid-template-columns: 1fr; gap: var(--space-10); }
   .navbar__links { display: none; }
@@ -621,7 +622,6 @@ textarea.field__control { resize: vertical; }
 
 @media (max-width: 560px) {
   .services__grid { grid-template-columns: 1fr; }
-  .howto__grid { grid-template-columns: 1fr; }
   .form__row { grid-template-columns: 1fr; }
   .hero__title { font-size: var(--text-3xl); }
   .section, .section--compact { padding-left: var(--container-pad); padding-right: var(--container-pad); }
