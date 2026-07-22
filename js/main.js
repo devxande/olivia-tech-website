@@ -3,12 +3,6 @@
 (function () {
   'use strict';
 
-  function renderIcons() {
-    if (window.lucide && typeof window.lucide.createIcons === 'function') {
-      window.lucide.createIcons();
-    }
-  }
-
   function scrollToContact() {
     var el = document.getElementById('contato');
     if (!el) return;
@@ -17,8 +11,6 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    renderIcons();
-
     // CTA buttons that should jump to the contact section
     document.querySelectorAll('[data-scroll-contact]').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
@@ -32,7 +24,14 @@
     setupReveal();
     setupHeroParallax();
     setupNavbarState();
+    setupFooterYear();
   });
+
+  // Ano do rodapé (movido do HTML inline para permitir CSP sem 'unsafe-inline').
+  function setupFooterYear() {
+    var el = document.getElementById('footer-year');
+    if (el) el.textContent = new Date().getFullYear();
+  }
 
   // --- Interações visuais --------------------------------------------------
 
@@ -69,6 +68,7 @@
     var groups = [
       { sel: '.services__head' },
       { sel: '.service-card', stagger: 70 },
+      { sel: '.services__diagram' },
       { sel: '.services__cta' },
       { sel: '.about__intro' },
       { sel: '.principle', stagger: 60 },
@@ -241,7 +241,6 @@
 
     form.classList.add('is-hidden');
     success.classList.remove('is-hidden');
-    renderIcons();
   }
 
   // --- helpers ------------------------------------------------------------

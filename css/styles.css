@@ -710,7 +710,6 @@ a:hover { color: var(--purple-700); }
   border-top: 1px solid var(--color-border-dark);
 }
 .contact__meta-row { display: flex; align-items: center; gap: var(--space-3); }
-.contact__meta-row i { width: 18px; height: 18px; color: var(--color-accent); }
 .contact__meta-row a { font-size: var(--text-sm); color: var(--color-text-inverse); }
 .contact__meta-row a:hover { color: var(--color-accent); }
 .contact__meta-row span {
@@ -791,7 +790,7 @@ textarea.field__control { resize: vertical; }
   align-items: center;
   justify-content: center;
 }
-.form__success-icon i { width: 22px; height: 22px; color: var(--color-accent-strong); }
+.form__success-icon svg { width: 22px; height: 22px; color: var(--color-accent-strong); }
 .form__success h3 {
   font-family: var(--font-display);
   font-weight: 700;
@@ -936,6 +935,153 @@ textarea.field__control { resize: vertical; }
   .hero__topology { transform: translateY(-50%) !important; }
 }
 
+/* ============================================================
+   Diagramas técnicos editoriais (SVG inline, tema Aurora Técnica)
+   Painéis escuros coerentes com o gradiente dos ícones e do hero.
+   ============================================================ */
+
+/* Painel escuro reutilizado pelos diagramas */
+.tech-figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.tech-figure__head { display: flex; flex-direction: column; gap: 8px; max-width: 640px; }
+.tech-figure__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-snug);
+  margin: 0;
+}
+.tech-figure__desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+.tech-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  background:
+    radial-gradient(60% 80% at 88% 4%, var(--aurora-cyan), transparent 70%),
+    radial-gradient(55% 70% at 4% 100%, var(--aurora-purple), transparent 72%),
+    linear-gradient(155deg, var(--purple-800), var(--purple-950));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(246, 243, 250, .05);
+}
+/* malha técnica sutil no fundo do painel */
+.tech-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  -webkit-mask-image: radial-gradient(90% 90% at 50% 30%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(90% 90% at 50% 30%, #000 40%, transparent 100%);
+  pointer-events: none;
+}
+.tech-diagram {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* Em telas estreitas o diagrama largo rola dentro do painel (o corpo da
+   página nunca rola na horizontal), preservando a legibilidade dos rótulos. */
+.tech-scroll { position: relative; z-index: 1; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* --- Elementos SVG comuns aos diagramas --- */
+.dg-chip-bg {
+  fill: rgba(246, 243, 250, .045);
+  stroke: var(--glass-border);
+  stroke-width: 1;
+}
+.dg-chip-bg--accent {
+  fill: rgba(79, 216, 224, .07);
+  stroke: rgba(79, 216, 224, .35);
+}
+.dg-title { fill: var(--purple-50); font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+.dg-sub   { fill: rgba(246, 243, 250, .6); font-family: var(--font-body); font-weight: 500; font-size: 11px; }
+.dg-tag {
+  fill: rgba(246, 243, 250, .55);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.dg-link { stroke: rgba(246, 243, 250, .28); stroke-width: 1.6; fill: none; }
+.dg-link--dash { stroke-dasharray: 5 6; }
+.dg-flow {
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+}
+.dg-node { fill: var(--color-accent); }
+.dg-node-core { fill: var(--purple-950); }
+.dg-glyph { stroke: var(--color-accent); stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.dg-glyph--soft { stroke: rgba(246, 243, 250, .5); }
+
+/* fluxo animado leve (pacotes trafegando) — “sempre no ar” */
+@media (prefers-reduced-motion: no-preference) {
+  .dg-flow {
+    stroke-dasharray: 10 190;
+    animation: dgFlow 3.4s linear infinite;
+  }
+  .dg-flow--b { animation-delay: 1.1s; }
+  .dg-flow--slow { animation-duration: 4.6s; }
+  .dg-node { animation: dgPulse 3.2s var(--ease-out) infinite; }
+  .dg-node:nth-of-type(2n) { animation-delay: .7s; }
+}
+@keyframes dgFlow {
+  from { stroke-dashoffset: 200; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes dgPulse {
+  0%, 100% { opacity: .85; }
+  50%      { opacity: 1; }
+}
+
+/* Legenda compacta (failover) */
+.dg-legend {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+.dg-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-text-inverse-muted);
+}
+.dg-legend__swatch { width: 22px; height: 0; border-top: 2px solid var(--color-accent); border-radius: 2px; }
+.dg-legend__swatch--standby { border-top-style: dashed; border-top-color: rgba(246, 243, 250, .4); }
+
+/* Posicionamento nas seções */
+.services__diagram { margin-top: var(--space-2); }
+.about__figure { margin-top: var(--space-2); }
+.about__figure .tech-panel { padding: var(--space-6); }
+
+@media (prefers-reduced-motion: reduce) {
+  .dg-flow { stroke-dasharray: none; }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .hero { padding: var(--space-24) 0 var(--space-20); }
@@ -957,4 +1103,8 @@ textarea.field__control { resize: vertical; }
   .hero__title { font-size: var(--text-3xl); }
   .hero__lead { font-size: var(--text-base); }
   .section, .section--compact { padding-left: var(--container-pad); padding-right: var(--container-pad); }
+  .tech-panel { padding: var(--space-5); }
+  .about__figure .tech-panel { padding: var(--space-5); }
+  /* mantém os rótulos legíveis: diagrama largo passa a rolar horizontalmente */
+  .services__diagram .tech-diagram { min-width: 560px; }
 }

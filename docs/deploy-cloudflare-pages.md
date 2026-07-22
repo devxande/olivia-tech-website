@@ -21,7 +21,13 @@
 
 ## Por que sem build?
 
-O projeto não usa Node, React, bundler ou pré-processador. Os arquivos já estão prontos para o navegador. Adicionar um build só traria complexidade sem benefício. Ícones (Lucide) e fontes (Google Fonts) são carregados via CDN em tempo de execução, no próprio navegador.
+O projeto não usa Node, React, bundler ou pré-processador. Os arquivos já estão prontos para o navegador. Adicionar um build só traria complexidade sem benefício. Ícones são SVG inline e as fontes (Manrope/Inter) são servidas localmente via `@font-face` — **não há dependências de CDN externo** em tempo de execução.
+
+## Cabeçalhos de segurança (`_headers`)
+
+O repositório inclui um arquivo `_headers` na raiz. O Cloudflare Pages o aplica automaticamente no deploy (sem configuração no painel). Ele define uma Content-Security-Policy estrita (`default-src 'self'`, sem CDNs), além de `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options: DENY` e `Strict-Transport-Security`. Como todo recurso é servido do próprio domínio, a CSP não precisa de exceções.
+
+> Se no futuro for adicionado algum recurso externo (script, fonte, imagem de outro domínio), a CSP precisará ser ajustada no `_headers`, senão o recurso será bloqueado pelo navegador.
 
 ## Passo a passo — GitHub
 
@@ -112,10 +118,13 @@ O domínio `oliviatech.com.br` está no Registro.br. Para apontá-lo ao Cloudfla
 
 Depois do primeiro deploy (na URL `*.pages.dev` e, em seguida, no domínio próprio):
 
-- [ ] Home carrega com CSS, JS e ícones (Lucide) renderizados.
+- [ ] Home carrega com CSS, JS, ícones (SVG inline) e fontes locais renderizados.
+- [ ] Nenhuma requisição a domínios externos (verificar aba Network: sem `unpkg`, `googleapis`, `gstatic`).
 - [ ] CTAs "Solicitar diagnóstico" rolam até a seção de contato.
 - [ ] Formulário: submit vazio bloqueia; envio válido abre o WhatsApp preenchido.
-- [ ] Console do navegador sem erros.
+- [ ] Console do navegador sem erros (inclusive sem violações de CSP).
+- [ ] Cabeçalhos presentes: conferir em [securityheaders.com](https://securityheaders.com) ou pela aba Network (resposta do documento deve trazer `content-security-policy`, `x-frame-options`, etc.).
+- [ ] Preview social: colar a URL no WhatsApp/redes e confirmar que o card com a `og-image.jpg` aparece.
 - [ ] Acesso via HTTPS com o redirect canônico funcionando (`www` ↔ apex).
 
 ## Reutilizando este fluxo em outros sites
