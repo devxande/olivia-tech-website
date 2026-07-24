@@ -120,6 +120,28 @@ a:hover { color: var(--purple-700); }
 
 .btn:active { transform: translateY(0); }
 
+/* ---------- Skip link (acessibilidade) ---------- */
+/* Fica fora da tela até receber foco por teclado, então aparece acima do navbar. */
+.skip-link {
+  position: fixed;
+  top: -60px;
+  left: var(--space-4);
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--purple-950);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  box-shadow: var(--shadow-md);
+  transition: top var(--duration-fast) var(--ease-out);
+}
+.skip-link:focus { top: var(--space-3); }
+/* o <main> recebe foco (tabindex -1) ao usar o skip link; sem anel visível */
+main:focus { outline: none; }
+
 /* ---------- Navbar ---------- */
 .navbar {
   position: sticky;
@@ -956,6 +978,16 @@ a:hover { color: var(--purple-700); }
   color: var(--color-text-inverse);
   text-decoration: none;
 }
+/* amplia o alvo de toque para 44px sem afastar o sublinhado do texto */
+.contact__meta-row a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 44px;
+}
 /* mesmo sublinhado que cresce dos links do navbar */
 .contact__meta-row a::after {
   content: "";
@@ -1090,16 +1122,30 @@ textarea.field__control { resize: vertical; }
   line-height: var(--leading-relaxed);
   margin: 0;
 }
-.footer__contact { display: flex; flex-direction: column; gap: var(--space-3); }
-.footer__contact-title {
+.footer__nav,
+.footer__contact { display: flex; flex-direction: column; gap: var(--space-1); }
+.footer__col-title {
   font-family: var(--font-body);
   font-size: var(--text-xs);
   font-weight: 600;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   color: var(--color-text-inverse-muted);
+  margin-bottom: var(--space-2);
 }
-.footer__contact a { font-size: var(--text-sm); color: var(--color-text-inverse); }
+/* links do rodapé com alvo de toque de 44px */
+.footer__nav a,
+.footer__contact a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.footer__nav a:hover,
 .footer__contact a:hover { color: var(--color-accent); }
 .footer__contact span {
   font-family: var(--font-body);

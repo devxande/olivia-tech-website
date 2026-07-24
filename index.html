@@ -146,6 +146,9 @@
 </head>
 <body>
 
+  <!-- Pula a navegação e vai direto ao conteúdo (visível só ao focar via teclado) -->
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
   <!-- Barra de progresso de rolagem (decorativa) -->
   <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
 
@@ -175,6 +178,8 @@
       </button>
     </div>
   </header>
+
+  <main id="conteudo" tabindex="-1">
 
   <!-- Hero -->
   <section class="hero" aria-label="Apresentação">
@@ -802,6 +807,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="footer__inner">
@@ -815,9 +822,18 @@
         </div>
         <p class="footer__tagline">Consultoria de infraestrutura de TI para empresas em Brasília, DF.</p>
       </div>
+      <nav class="footer__nav" aria-label="Navegação do rodapé">
+        <span class="footer__col-title">Navegação</span>
+        <a href="#servicos">Serviços</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#faq">Perguntas frequentes</a>
+        <a href="#contato">Contato</a>
+      </nav>
       <div class="footer__contact">
-        <span class="footer__contact-title">Contato</span>
+        <span class="footer__col-title">Contato</span>
         <a href="mailto:contato@oliviatech.com.br">contato@oliviatech.com.br</a>
+        <a href="https://wa.me/5561981399376" target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
         <span>Seg–Sex, a partir das 19h</span>
         <span>Fins de semana, sob consulta</span>
       </div>
