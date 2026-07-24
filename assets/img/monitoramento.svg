@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Painel de monitoramento com gráfico de tráfego, indicadores e lista de status dos serviços">
+  <defs>
+    <linearGradient id="mn-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#170d27"/><stop offset="1" stop-color="#0c0614"/>
+    </linearGradient>
+    <linearGradient id="mn-area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4FD8E0" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#4FD8E0" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="mn-panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22163a"/><stop offset="1" stop-color="#180f2c"/>
+    </linearGradient>
+    <style>
+      .panel { fill: url(#mn-panel); stroke: #F6F3FA; stroke-opacity: .10; }
+      .grid { stroke: #F6F3FA; stroke-opacity: .06; }
+      .line { fill: none; stroke: #4FD8E0; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+      .bar { fill: #4FD8E0; fill-opacity: .55; }
+      .bar--dim { fill-opacity: .22; }
+      .chip { fill: #F6F3FA; fill-opacity: .12; }
+      .ok { fill: #4FD8E0; }
+      .cursor { stroke: #F6F3FA; stroke-opacity: .25; stroke-width: 1; }
+      @media (prefers-reduced-motion: no-preference) {
+        .line { stroke-dasharray: 900; stroke-dashoffset: 900; animation: draw 4.5s ease-in-out infinite; }
+        .cursor { animation: scan 4.5s ease-in-out infinite; }
+        .ok { animation: beat 2.4s ease-in-out infinite; }
+        .ok--2 { animation-delay: .6s } .ok--3 { animation-delay: 1.2s } .ok--4 { animation-delay: 1.8s }
+        .bar { animation: rise 3.6s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+        .bar--2 { animation-delay: .3s } .bar--3 { animation-delay: .6s } .bar--4 { animation-delay: .9s } .bar--5 { animation-delay: 1.2s }
+      }
+      @keyframes draw { 0% { stroke-dashoffset: 900 } 55%,100% { stroke-dashoffset: 0 } }
+      @keyframes scan { 0% { transform: translateX(0) } 55%,100% { transform: translateX(556px) } }
+      @keyframes beat { 0%,100% { opacity: .45 } 50% { opacity: 1 } }
+      @keyframes rise { from { transform: scaleY(.72) } to { transform: scaleY(1) } }
+    </style>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#mn-bg)"/>
+
+  <!-- gráfico principal -->
+  <rect class="panel" x="60" y="60" width="680" height="300" rx="16"/>
+  <g class="grid">
+    <path d="M92 130 H708 M92 190 H708 M92 250 H708 M92 310 H708"/>
+  </g>
+  <path fill="url(#mn-area)" d="M92 300 L92 268 L160 246 L228 274 L296 206 L364 232 L432 166 L500 196 L568 142 L636 174 L708 128 L708 328 L92 328 Z"/>
+  <path class="line" d="M92 268 L160 246 L228 274 L296 206 L364 232 L432 166 L500 196 L568 142 L636 174 L708 128"/>
+  <path class="cursor" d="M92 96 V328"/>
+
+  <!-- barras (latência por período) -->
+  <rect class="panel" x="60" y="392" width="330" height="148" rx="16"/>
+  <g>
+    <rect class="bar"          x="96"  y="440" width="26" height="72" rx="5"/>
+    <rect class="bar bar--2"   x="140" y="424" width="26" height="88" rx="5"/>
+    <rect class="bar bar--3 bar--dim" x="184" y="452" width="26" height="60" rx="5"/>
+    <rect class="bar bar--4"   x="228" y="412" width="26" height="100" rx="5"/>
+    <rect class="bar bar--5 bar--dim" x="272" y="446" width="26" height="66" rx="5"/>
+    <rect class="bar"          x="316" y="428" width="26" height="84" rx="5"/>
+  </g>
+
+  <!-- lista de serviços monitorados -->
+  <rect class="panel" x="410" y="392" width="330" height="148" rx="16"/>
+  <g>
+    <circle class="ok" cx="440" cy="422" r="4.6"/><rect class="chip" x="458" y="417" width="150" height="9" rx="4.5"/>
+    <circle class="ok ok--2" cx="440" cy="454" r="4.6"/><rect class="chip" x="458" y="449" width="196" height="9" rx="4.5"/>
+    <circle class="ok ok--3" cx="440" cy="486" r="4.6"/><rect class="chip" x="458" y="481" width="128" height="9" rx="4.5"/>
+    <circle class="ok ok--4" cx="440" cy="518" r="4.6"/><rect class="chip" x="458" y="513" width="172" height="9" rx="4.5"/>
+  </g>
+
+  <!-- cabeçalho do painel -->
+  <g>
+    <rect class="chip" x="92" y="90" width="120" height="10" rx="5"/>
+    <rect class="chip" x="640" y="90" width="68" height="10" rx="5" fill-opacity=".2"/>
+  </g>
+</svg>

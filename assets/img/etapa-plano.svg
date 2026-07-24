@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Plano de trabalho com prioridades e etapas em sequência">
+  <defs>
+    <linearGradient id="pl-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a1029"/><stop offset="1" stop-color="#0d0716"/>
+    </linearGradient>
+    <linearGradient id="pl-card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#241738"/><stop offset="1" stop-color="#180f2c"/>
+    </linearGradient>
+    <style>
+      .row { fill: #F6F3FA; fill-opacity: .14; }
+      .mark { fill: #4FD8E0; }
+      .track { stroke: #F6F3FA; stroke-opacity: .12; stroke-width: 2; }
+      .prog { stroke: #4FD8E0; stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 360; }
+      @media (prefers-reduced-motion: no-preference) {
+        .prog { animation: fill 5s ease-in-out infinite; }
+        .mark { animation: mk 3.2s ease-in-out infinite; }
+        .mark--b { animation-delay: .8s } .mark--c { animation-delay: 1.6s }
+        .row--anim { animation: rw 4s ease-in-out infinite; transform-origin: 0 50%; }
+        .row--b { animation-delay: .5s } .row--c { animation-delay: 1s }
+      }
+      @keyframes fill { 0% { stroke-dashoffset: 360 } 60%,100% { stroke-dashoffset: 90 } }
+      @keyframes mk { 0%,100% { opacity: .4 } 50% { opacity: 1 } }
+      @keyframes rw { 0%,100% { transform: scaleX(.94) } 50% { transform: scaleX(1) } }
+    </style>
+  </defs>
+  <rect width="640" height="360" fill="url(#pl-bg)"/>
+
+  <!-- documento do plano -->
+  <rect x="56" y="44" width="330" height="272" rx="14" fill="url(#pl-card)" stroke="#F6F3FA" stroke-opacity=".10"/>
+  <rect class="mark" x="84" y="76" width="86" height="10" rx="5"/>
+  <g>
+    <rect class="row row--anim" x="84" y="112" width="250" height="10" rx="5"/>
+    <rect class="row row--anim row--b" x="84" y="140" width="204" height="10" rx="5"/>
+    <rect class="row row--anim row--c" x="84" y="168" width="232" height="10" rx="5"/>
+    <rect class="row row--anim" x="84" y="196" width="168" height="10" rx="5"/>
+  </g>
+  <g>
+    <rect x="84" y="232" width="112" height="30" rx="8" fill="#4FD8E0" fill-opacity=".16" stroke="#4FD8E0" stroke-opacity=".4"/>
+    <rect x="208" y="232" width="112" height="30" rx="8" fill="#F6F3FA" fill-opacity=".06" stroke="#F6F3FA" stroke-opacity=".12"/>
+  </g>
+
+  <!-- linha do tempo com marcos -->
+  <g transform="translate(440 0)">
+    <path class="track" d="M20 76 V300"/>
+    <path class="prog" fill="none" d="M20 76 V300"/>
+    <g>
+      <circle class="mark" cx="20" cy="96" r="7"/>
+      <rect class="row" x="44" y="90" width="96" height="9" rx="4.5"/>
+      <circle class="mark mark--b" cx="20" cy="186" r="7"/>
+      <rect class="row" x="44" y="180" width="72" height="9" rx="4.5"/>
+      <circle class="mark mark--c" cx="20" cy="276" r="7"/>
+      <rect class="row" x="44" y="270" width="88" height="9" rx="4.5"/>
+    </g>
+  </g>
+</svg>

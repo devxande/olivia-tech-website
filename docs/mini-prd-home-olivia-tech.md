@@ -141,7 +141,7 @@ E:\Olivia Tech\
 │   ├── favicon.svg
 │   ├── apple-touch-icon.png
 │   ├── og-image.jpg                 # Preview social otimizado (1200×630, ~59 KB)
-│   └── fonts\                       # Manrope 700/800 e Inter 400/500/600/700 (woff2, subset latin)
+│   └── fonts\                       # Manrope e Inter (woff2 variável, subset latin; 1 arquivo por família)
 └── docs\
     ├── mini-prd-home-olivia-tech.md # Este documento
     └── deploy-cloudflare-pages.md   # Guia de publicação

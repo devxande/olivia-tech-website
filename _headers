@@ -14,3 +14,7 @@
 # Fontes locais: imutáveis, cache longo (o conteúdo do arquivo não muda).
 /assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Ilustrações vetoriais: podem ser reeditadas, então cache curto com revalidação.
+/assets/img/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800

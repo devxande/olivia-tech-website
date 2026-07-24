@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 480" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Fileira de racks em silhueta com fluxos de dados atravessando a sala">
+  <defs>
+    <linearGradient id="bo-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#150c24"/><stop offset=".55" stop-color="#0f0819"/><stop offset="1" stop-color="#0b0512"/>
+    </linearGradient>
+    <radialGradient id="bo-glow" cx=".28" cy=".2" r=".6">
+      <stop offset="0" stop-color="#4FD8E0" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#4FD8E0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bo-glow2" cx=".8" cy=".9" r=".55">
+      <stop offset="0" stop-color="#6B3FA0" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#6B3FA0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bo-rack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a2557"/><stop offset=".6" stop-color="#241738"/><stop offset="1" stop-color="#140c24"/>
+    </linearGradient>
+    <linearGradient id="bo-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4FD8E0" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#4FD8E0" stop-opacity="0"/>
+    </linearGradient>
+    <style>
+      .flow { stroke: #4FD8E0; stroke-width: 1.6; fill: none; stroke-dasharray: 26 320; opacity: .75; }
+      .led { fill: #4FD8E0; }
+      @media (prefers-reduced-motion: no-preference) {
+        .flow { animation: run 6s linear infinite; }
+        .flow--b { animation-duration: 8s; animation-delay: -2s }
+        .flow--c { animation-duration: 7s; animation-delay: -4s }
+        .led { animation: tw 3s ease-in-out infinite; }
+        .led--b { animation-delay: .7s } .led--c { animation-delay: 1.4s } .led--d { animation-delay: 2.1s }
+      }
+      @keyframes run { to { stroke-dashoffset: -1730 } }
+      @keyframes tw { 0%,100% { opacity: .28 } 50% { opacity: 1 } }
+    </style>
+  </defs>
+
+  <rect width="1600" height="480" fill="url(#bo-bg)"/>
+  <rect width="1600" height="480" fill="url(#bo-glow)"/>
+  <rect width="1600" height="480" fill="url(#bo-glow2)"/>
+
+  <!-- malha técnica de fundo -->
+  <g stroke="#F6F3FA" stroke-opacity=".045">
+    <path d="M0 80 H1600 M0 160 H1600 M0 240 H1600 M0 320 H1600 M0 400 H1600"/>
+    <path d="M100 0 V480 M260 0 V480 M420 0 V480 M580 0 V480 M740 0 V480 M900 0 V480 M1060 0 V480 M1220 0 V480 M1380 0 V480 M1540 0 V480"/>
+  </g>
+
+  <!-- fluxos de dados -->
+  <g>
+    <path class="flow" d="M-40 150 H1640"/>
+    <path class="flow flow--b" d="M-40 258 H1640" stroke-opacity=".6"/>
+    <path class="flow flow--c" d="M-40 348 H1640" stroke-opacity=".4"/>
+  </g>
+
+  <!-- silhueta de racks -->
+  <g fill="url(#bo-rack)" stroke="#F6F3FA" stroke-opacity=".16">
+    <rect x="120" y="196" width="104" height="284" rx="8"/>
+    <rect x="248" y="232" width="88"  height="248" rx="8"/>
+    <rect x="360" y="176" width="112" height="304" rx="8"/>
+    <rect x="496" y="244" width="84"  height="236" rx="8"/>
+    <rect x="604" y="208" width="100" height="272" rx="8"/>
+    <rect x="728" y="252" width="88"  height="228" rx="8"/>
+    <rect x="840" y="184" width="108" height="296" rx="8"/>
+    <rect x="972" y="240" width="92"  height="240" rx="8"/>
+    <rect x="1088" y="204" width="104" height="276" rx="8"/>
+    <rect x="1216" y="248" width="88"  height="232" rx="8"/>
+    <rect x="1328" y="188" width="112" height="292" rx="8"/>
+    <rect x="1464" y="236" width="96"  height="244" rx="8"/>
+  </g>
+
+  <!-- luz nas tampas dos racks, dando volume à fileira -->
+  <g fill="url(#bo-top)">
+    <rect x="120" y="196" width="104" height="26" rx="8"/><rect x="248" y="232" width="88" height="24" rx="8"/>
+    <rect x="360" y="176" width="112" height="28" rx="8"/><rect x="496" y="244" width="84" height="24" rx="8"/>
+    <rect x="604" y="208" width="100" height="26" rx="8"/><rect x="728" y="252" width="88" height="24" rx="8"/>
+    <rect x="840" y="184" width="108" height="28" rx="8"/><rect x="972" y="240" width="92" height="24" rx="8"/>
+    <rect x="1088" y="204" width="104" height="26" rx="8"/><rect x="1216" y="248" width="88" height="24" rx="8"/>
+    <rect x="1328" y="188" width="112" height="28" rx="8"/><rect x="1464" y="236" width="96" height="24" rx="8"/>
+  </g>
+
+  <!-- indicadores nos racks -->
+  <g>
+    <circle class="led" cx="150" cy="226" r="3.4"/><circle class="led led--c" cx="164" cy="226" r="3.4"/>
+    <circle class="led led--b" cx="278" cy="262" r="3.4"/>
+    <circle class="led led--d" cx="390" cy="206" r="3.4"/><circle class="led" cx="404" cy="206" r="3.4"/>
+    <circle class="led led--c" cx="526" cy="274" r="3.4"/>
+    <circle class="led led--b" cx="634" cy="238" r="3.4"/>
+    <circle class="led led--d" cx="758" cy="282" r="3.4"/>
+    <circle class="led" cx="870" cy="214" r="3.4"/><circle class="led led--b" cx="884" cy="214" r="3.4"/>
+    <circle class="led led--c" cx="1002" cy="270" r="3.4"/>
+    <circle class="led led--d" cx="1118" cy="234" r="3.4"/>
+    <circle class="led led--b" cx="1246" cy="278" r="3.4"/>
+    <circle class="led" cx="1358" cy="218" r="3.4"/><circle class="led led--c" cx="1372" cy="218" r="3.4"/>
+    <circle class="led led--d" cx="1494" cy="266" r="3.4"/>
+  </g>
+</svg>

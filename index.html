@@ -28,6 +28,12 @@
   <meta name="twitter:description" content="Consultoria de infraestrutura de TI em Brasília: redes, Wi-Fi corporativo, firewall, servidores, backup, VPN, links e failover. Atendimento consultivo, com diagnóstico claro antes de qualquer proposta.">
   <meta name="twitter:image" content="https://oliviatech.com.br/assets/og-image.jpg">
 
+  <!-- Preload das fontes da primeira dobra: H1 em Manrope-800 (elemento LCP) e
+       corpo em Inter-400. crossorigin é obrigatório mesmo na mesma origem —
+       @font-face busca em modo CORS; sem ele o preload não é reaproveitado. -->
+  <link rel="preload" href="assets/fonts/Manrope.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
+
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/styles.css">
 
@@ -92,21 +98,44 @@
         </svg>
         <span class="brand__name">Olivia Tech</span>
       </div>
-      <nav class="navbar__links">
+      <nav class="navbar__links" id="primary-nav" aria-label="Navegação principal">
         <a href="#servicos">Serviços</a>
         <a href="#sobre">Sobre</a>
         <a href="#como-funciona">Como funciona</a>
         <a href="#contato">Contato</a>
       </nav>
       <button class="navbar__cta" data-scroll-contact type="button">Solicitar diagnóstico</button>
+      <button class="navbar__toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav">
+        <span class="navbar__toggle-box" aria-hidden="true">
+          <span class="navbar__toggle-bar"></span>
+          <span class="navbar__toggle-bar"></span>
+          <span class="navbar__toggle-bar"></span>
+        </span>
+      </button>
     </div>
   </header>
 
   <!-- Hero -->
   <section class="hero" aria-label="Apresentação">
+    <!--
+      Vídeo de fundo (opcional, desligado): para ativar, acrescente ao elemento
+      abaixo o atributo data-hero-video="assets/video/hero" e coloque em
+      assets/video/ os arquivos hero.webm, hero.mp4 e hero-poster.jpg.
+      Sem o atributo nada é baixado. Detalhes em docs/assets-guia.md.
+    -->
     <div class="hero__bg" aria-hidden="true">
-      <div class="hero__glow"></div>
+      <!-- Aurora Técnica: camadas de luz que derivam lentamente atrás do conteúdo -->
+      <div class="hero__glow">
+        <span class="hero__aurora hero__aurora--cyan"></span>
+        <span class="hero__aurora hero__aurora--violet"></span>
+        <span class="hero__aurora hero__aurora--deep"></span>
+      </div>
+      <div class="hero__beam"></div>
       <div class="hero__grid"></div>
+      <!-- Malha de rede animada; só entra por JS, em telas grandes e sem
+           preferência por movimento reduzido. A topologia SVG abaixo é o
+           estado padrão e some quando a malha assume. -->
+      <canvas class="hero__mesh"></canvas>
       <svg class="hero__topology" viewBox="0 0 520 460" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g class="link">
           <path d="M70 120 L190 66" /><path d="M190 66 L310 120" /><path d="M70 120 L160 224" />
@@ -193,6 +222,57 @@
           <h3 class="service-card__title">Suporte e consultoria</h3>
           <p class="service-card__desc">Atendimento consultivo e direto para resolver, documentar e evitar que os mesmos problemas voltem.</p>
         </article>
+      </div>
+
+      <!-- Vitrine visual das frentes (ilustrações vetoriais próprias) -->
+      <div class="showcase">
+        <figure class="media-card">
+          <div class="media-card__frame">
+            <img class="media-card__img" src="assets/img/rack-servidores.svg"
+                 alt="Ilustração de um rack de servidores com unidades ativas, patch panel e cabeamento organizado"
+                 width="800" height="600" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="media-card__body">
+            <h3 class="media-card__title">Rack sem improviso</h3>
+            <p class="media-card__desc">Equipamentos acomodados e cabeamento identificado — manutenção sem adivinhação.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="media-card">
+          <div class="media-card__frame">
+            <img class="media-card__img" src="assets/img/wifi-corporativo.svg"
+                 alt="Ilustração de planta de escritório com pontos de acesso Wi-Fi e suas áreas de cobertura"
+                 width="800" height="600" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="media-card__body">
+            <h3 class="media-card__title">Cobertura pensada por área</h3>
+            <p class="media-card__desc">Pontos de acesso posicionados conforme o uso, com rede separada para equipe e visitantes.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="media-card">
+          <div class="media-card__frame">
+            <img class="media-card__img" src="assets/img/firewall-perimetro.svg"
+                 alt="Ilustração de firewall filtrando o tráfego entre a internet e os segmentos internos da rede"
+                 width="800" height="600" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="media-card__body">
+            <h3 class="media-card__title">Perímetro controlado</h3>
+            <p class="media-card__desc">Regras de entrada e saída definidas na implantação e segmentos isolados dentro da rede.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="media-card">
+          <div class="media-card__frame">
+            <img class="media-card__img" src="assets/img/monitoramento.svg"
+                 alt="Ilustração de painel de monitoramento com gráfico de tráfego e status dos serviços"
+                 width="800" height="600" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="media-card__body">
+            <h3 class="media-card__title">Decisão com dado na mão</h3>
+            <p class="media-card__desc">Leitura de tráfego, links e serviços para embasar o que vale mudar — e o que não vale.</p>
+          </figcaption>
+        </figure>
       </div>
 
       <!-- Diagrama editorial: como as frentes se conectam na operação -->
@@ -376,6 +456,11 @@
         </figure>
       </div>
       <div class="principles">
+        <figure class="media media--about">
+          <img class="media__img" src="assets/img/sala-tecnica.svg"
+               alt="Ilustração de um corredor de sala técnica com fileiras de racks em perspectiva"
+               width="800" height="600" loading="lazy" decoding="async">
+        </figure>
         <div class="principle">
           <span class="principle__num">01</span>
           <div>
@@ -408,6 +493,33 @@
     </div>
   </section>
 
+  <!-- Faixa editorial: o que sustenta a operação -->
+  <section class="band" aria-label="Operação">
+    <div class="band__media" aria-hidden="true">
+      <img src="assets/img/banda-operacao.svg" alt="" width="1600" height="480" loading="lazy" decoding="async">
+    </div>
+    <div class="band__inner">
+      <div class="band__head">
+        <span class="eyebrow eyebrow--accent">Operação</span>
+        <h2 class="band__title">O que mantém a operação de pé quando algo falha</h2>
+      </div>
+      <ul class="band__list">
+        <li class="band__item">
+          <span class="band__icon"><svg class="lucide" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6a9 9 0 0 0-9 9V3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/></svg></span>
+          <span class="band__text"><strong>Caminho reserva.</strong> Links redundantes com failover, para uma queda não parar o expediente.</span>
+        </li>
+        <li class="band__item">
+          <span class="band__icon"><svg class="lucide" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8 A6 6 0 1 1 12 3.2"/><path d="M12 1 L12.5 3.7 L9.7 4"/><path d="m9 14 2 2 4-4"/></svg></span>
+          <span class="band__text"><strong>Backup que volta.</strong> Recuperação testada na entrega — cópia sem restauração comprovada não é backup.</span>
+        </li>
+        <li class="band__item">
+          <span class="band__icon"><svg class="lucide" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></svg></span>
+          <span class="band__text"><strong>Registro do que foi feito.</strong> Cada mudança documentada, para a próxima decisão não começar do zero.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <!-- Como funciona -->
   <section class="section section--page" id="como-funciona" aria-label="Como funciona">
     <div class="section__inner howto__inner">
@@ -421,16 +533,25 @@
       </div>
       <div class="howto__grid">
         <article class="step-card">
+          <div class="step-card__thumb">
+            <img src="assets/img/etapa-diagnostico.svg" alt="" width="640" height="360" loading="lazy" decoding="async">
+          </div>
           <span class="step-card__num">01</span>
           <h3 class="step-card__title">Diagnóstico</h3>
           <p class="step-card__desc">Começamos entendendo o que você já tem: rede, servidores, backup e pontos de risco. Nada muda antes disso.</p>
         </article>
         <article class="step-card">
+          <div class="step-card__thumb">
+            <img src="assets/img/etapa-plano.svg" alt="" width="640" height="360" loading="lazy" decoding="async">
+          </div>
           <span class="step-card__num">02</span>
           <h3 class="step-card__title">Plano</h3>
           <p class="step-card__desc">Você recebe um plano claro do que faz sentido para o seu momento — com prioridades e sem excessos.</p>
         </article>
         <article class="step-card">
+          <div class="step-card__thumb">
+            <img src="assets/img/etapa-execucao.svg" alt="" width="640" height="360" loading="lazy" decoding="async">
+          </div>
           <span class="step-card__num">03</span>
           <h3 class="step-card__title">Execução e acompanhamento</h3>
           <p class="step-card__desc">Executamos as mudanças combinadas e seguimos disponíveis para ajustes, dentro do horário de atendimento.</p>
@@ -446,30 +567,40 @@
   <!-- Disponibilidade -->
   <section class="section section--compact section--alt" aria-label="Disponibilidade">
     <div class="section__inner availability-section__inner">
-      <div class="availability-section__header">
-        <span class="eyebrow eyebrow--brand">Disponibilidade</span>
-        <h2 class="section-heading section-heading--2xl">Atendimento consultivo, com horário definido</h2>
-        <p class="availability-section__lead">
-          Atendemos de segunda a sexta a partir das 19h e, aos fins de semana, mediante agendamento.
-          Não é um plantão 24 horas: é uma agenda enxuta, pensada para dar atenção real a cada cliente
-          e conversar com calma sobre a sua operação.
-        </p>
-      </div>
-      <div class="availability-cards">
-        <div class="availability-card">
-          <span class="availability-card__label">Seg – Sex</span>
-          <span class="availability-card__value">A partir das 19h</span>
+      <div class="availability-section__content">
+        <div class="availability-section__header">
+          <span class="eyebrow eyebrow--brand">Disponibilidade</span>
+          <h2 class="section-heading section-heading--2xl">Atendimento consultivo, com horário definido</h2>
+          <p class="availability-section__lead">
+            Atendemos de segunda a sexta a partir das 19h e, aos fins de semana, mediante agendamento.
+            Não é um plantão 24 horas: é uma agenda enxuta, pensada para dar atenção real a cada cliente
+            e conversar com calma sobre a sua operação.
+          </p>
         </div>
-        <div class="availability-card">
-          <span class="availability-card__label">Fins de semana</span>
-          <span class="availability-card__value">Sob consulta</span>
+        <div class="availability-cards">
+          <div class="availability-card">
+            <span class="availability-card__label">Seg – Sex</span>
+            <span class="availability-card__value">A partir das 19h</span>
+          </div>
+          <div class="availability-card">
+            <span class="availability-card__label">Fins de semana</span>
+            <span class="availability-card__value">Sob consulta</span>
+          </div>
         </div>
       </div>
+      <figure class="media media--availability">
+        <img class="media__img" src="assets/img/suporte-bancada.svg"
+             alt="Ilustração de uma bancada técnica vista de cima, com notebook em terminal, switch de rede, cabos identificados e ferramenta de crimpar"
+             width="800" height="600" loading="lazy" decoding="async">
+      </figure>
     </div>
   </section>
 
   <!-- Contato -->
   <section id="contato" class="section section--brand" aria-label="Contato">
+    <div class="contact__texture" aria-hidden="true">
+      <img src="assets/img/cabeamento-patch.svg" alt="" width="1600" height="900" loading="lazy" decoding="async">
+    </div>
     <div class="section__inner contact__inner">
       <div class="contact__intro">
         <span class="eyebrow eyebrow--accent">Contato</span>

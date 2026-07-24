@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Corredor de sala técnica com fileiras de racks em perspectiva">
+  <defs>
+    <linearGradient id="st-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#150c24"/><stop offset="1" stop-color="#0b0512"/>
+    </linearGradient>
+    <radialGradient id="st-end" cx=".5" cy=".52" r=".34">
+      <stop offset="0" stop-color="#4FD8E0" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#4FD8E0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="st-face" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2b1c43"/><stop offset="1" stop-color="#170e2b"/>
+    </linearGradient>
+    <linearGradient id="st-face-r" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#2b1c43"/><stop offset="1" stop-color="#170e2b"/>
+    </linearGradient>
+    <linearGradient id="st-floor" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#4FD8E0" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#4FD8E0" stop-opacity="0"/>
+    </linearGradient>
+    <style>
+      .led { fill: #4FD8E0; }
+      .strip { fill: #4FD8E0; fill-opacity: .5; }
+      @media (prefers-reduced-motion: no-preference) {
+        .led { animation: b 3.2s ease-in-out infinite; }
+        .led--b { animation-delay: .8s } .led--c { animation-delay: 1.6s } .led--d { animation-delay: 2.4s }
+        .strip { animation: g 5s ease-in-out infinite; }
+        .haze { animation: h 9s ease-in-out infinite alternate; }
+      }
+      @keyframes b { 0%,100% { opacity: .3 } 50% { opacity: 1 } }
+      @keyframes g { 0%,100% { opacity: .35 } 50% { opacity: .8 } }
+      @keyframes h { from { opacity: .75 } to { opacity: 1 } }
+    </style>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#st-bg)"/>
+
+  <!-- piso e teto convergindo para o fundo -->
+  <path d="M0 600 L360 318 L440 318 L800 600 Z" fill="#100819"/>
+  <path d="M0 600 L360 318 L440 318 L800 600 Z" fill="url(#st-floor)"/>
+  <path d="M0 0 L360 292 L440 292 L800 0 Z" fill="#0e0718"/>
+
+  <!-- fundo iluminado do corredor -->
+  <rect x="352" y="286" width="96" height="44" rx="6" fill="#1a1030" stroke="#4FD8E0" stroke-opacity=".35"/>
+  <circle class="haze" cx="400" cy="308" r="150" fill="url(#st-end)"/>
+
+  <!-- luminárias do teto -->
+  <g class="strip">
+    <path d="M300 120 L360 274 L440 274 L500 120 Z" opacity=".18"/>
+    <rect x="352" y="262" width="96" height="8" rx="4"/>
+    <rect x="318" y="188" width="164" height="7" rx="3.5" opacity=".7"/>
+    <rect x="286" y="120" width="228" height="6" rx="3" opacity=".45"/>
+  </g>
+
+  <!-- fileira esquerda -->
+  <g stroke="#F6F3FA" stroke-opacity=".10">
+    <polygon points="18,96 132,152 132,470 18,556" fill="url(#st-face)"/>
+    <polygon points="140,156 232,202 232,432 140,476" fill="url(#st-face)"/>
+    <polygon points="240,206 306,240 306,402 240,430" fill="url(#st-face)"/>
+    <polygon points="313,242 358,266 358,378 313,398" fill="url(#st-face)"/>
+  </g>
+  <g>
+    <circle class="led" cx="112" cy="200" r="4"/><circle class="led led--b" cx="112" cy="240" r="4"/><circle class="led led--c" cx="112" cy="280" r="4"/>
+    <circle class="led led--b" cx="216" cy="248" r="3.2"/><circle class="led led--d" cx="216" cy="282" r="3.2"/>
+    <circle class="led led--c" cx="294" cy="278" r="2.6"/>
+  </g>
+
+  <!-- fileira direita -->
+  <g stroke="#F6F3FA" stroke-opacity=".10">
+    <polygon points="782,96 668,152 668,470 782,556" fill="url(#st-face-r)"/>
+    <polygon points="660,156 568,202 568,432 660,476" fill="url(#st-face-r)"/>
+    <polygon points="560,206 494,240 494,402 560,430" fill="url(#st-face-r)"/>
+    <polygon points="487,242 442,266 442,378 487,398" fill="url(#st-face-r)"/>
+  </g>
+  <g>
+    <circle class="led led--c" cx="688" cy="210" r="4"/><circle class="led" cx="688" cy="250" r="4"/><circle class="led led--d" cx="688" cy="290" r="4"/>
+    <circle class="led led--d" cx="584" cy="252" r="3.2"/><circle class="led led--b" cx="584" cy="286" r="3.2"/>
+    <circle class="led" cx="506" cy="280" r="2.6"/>
+  </g>
+
+  <!-- marcações do piso -->
+  <g stroke="#4FD8E0" stroke-opacity=".16" stroke-width="2">
+    <path d="M352 340 L300 600 M448 340 L500 600"/>
+  </g>
+</svg>

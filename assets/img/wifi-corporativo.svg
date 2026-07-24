@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Planta de escritório vista de cima com dois pontos de acesso Wi-Fi e suas áreas de cobertura">
+  <defs>
+    <linearGradient id="wf-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#170d27"/><stop offset="1" stop-color="#0c0614"/>
+    </linearGradient>
+    <linearGradient id="wf-floor" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#221639"/><stop offset="1" stop-color="#170e2b"/>
+    </linearGradient>
+    <radialGradient id="wf-cover" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#4FD8E0" stop-opacity=".30"/>
+      <stop offset=".45" stop-color="#4FD8E0" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#4FD8E0" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .wall { stroke: #F6F3FA; stroke-opacity: .22; stroke-width: 3; fill: none; stroke-linecap: round; }
+      .room { fill: #F6F3FA; fill-opacity: .035; stroke: #F6F3FA; stroke-opacity: .09; }
+      .desk { fill: #2e1e48; stroke: #F6F3FA; stroke-opacity: .14; }
+      .seat { fill: #F6F3FA; fill-opacity: .16; }
+      .dev  { fill: #F6F3FA; fill-opacity: .5; }
+      .dev-screen { fill: #4FD8E0; fill-opacity: .55; }
+      .ring { fill: none; stroke: #4FD8E0; stroke-width: 2; opacity: 0; }
+      .ap-body { fill: #120a1c; stroke: #4FD8E0; stroke-opacity: .65; stroke-width: 2; }
+      .ap-core { fill: #4FD8E0; }
+      .link { stroke: #4FD8E0; stroke-opacity: .38; stroke-width: 1.5; fill: none; stroke-dasharray: 4 7; }
+      @media (prefers-reduced-motion: no-preference) {
+        .ring { animation: pulse 4.2s ease-out infinite; }
+        .ring--2 { animation-delay: 1.4s; }
+        .ring--3 { animation-delay: 2.8s; }
+        .ap-core { animation: core 3s ease-in-out infinite; }
+        .link { animation: dash 3.2s linear infinite; }
+        .dev-screen { animation: scr 3.6s ease-in-out infinite; }
+        .dev-screen--b { animation-delay: .9s } .dev-screen--c { animation-delay: 1.8s }
+      }
+      @keyframes pulse {
+        0%   { opacity: .7;  transform: scale(.18); }
+        70%  { opacity: .06; transform: scale(1); }
+        100% { opacity: 0;   transform: scale(1.02); }
+      }
+      @keyframes core { 0%,100% { opacity: .65 } 50% { opacity: 1 } }
+      @keyframes dash { to { stroke-dashoffset: -22 } }
+      @keyframes scr { 0%,100% { fill-opacity: .3 } 50% { fill-opacity: .75 } }
+    </style>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#wf-bg)"/>
+
+  <!-- laje do andar -->
+  <rect x="60" y="60" width="680" height="480" rx="18" fill="url(#wf-floor)" stroke="#F6F3FA" stroke-opacity=".12"/>
+
+  <!-- divisórias internas -->
+  <g class="room">
+    <rect x="88" y="88" width="248" height="184" rx="10"/>
+    <rect x="368" y="88" width="164" height="184" rx="10"/>
+    <rect x="564" y="88" width="148" height="184" rx="10"/>
+    <rect x="88" y="308" width="216" height="204" rx="10"/>
+  </g>
+  <g class="wall">
+    <path d="M352 76 V284"/>
+    <path d="M548 88 V272"/>
+    <path d="M76 292 H336"/>
+    <path d="M320 300 V524"/>
+  </g>
+
+  <!-- cobertura dos pontos de acesso -->
+  <circle cx="250" cy="196" r="196" fill="url(#wf-cover)"/>
+  <circle cx="580" cy="404" r="182" fill="url(#wf-cover)"/>
+
+  <!-- estações de trabalho -->
+  <g>
+    <g><rect class="desk" x="112" y="128" width="86" height="40" rx="6"/><circle class="seat" cx="155" cy="112" r="9"/></g>
+    <g><rect class="desk" x="222" y="128" width="86" height="40" rx="6"/><circle class="seat" cx="265" cy="112" r="9"/></g>
+    <g><rect class="desk" x="112" y="204" width="86" height="40" rx="6"/><circle class="seat" cx="155" cy="260" r="9"/></g>
+    <g><rect class="desk" x="222" y="204" width="86" height="40" rx="6"/><circle class="seat" cx="265" cy="260" r="9"/></g>
+
+    <!-- sala de reunião -->
+    <g>
+      <rect class="desk" x="392" y="140" width="116" height="80" rx="12"/>
+      <circle class="seat" cx="382" cy="164" r="9"/><circle class="seat" cx="382" cy="200" r="9"/>
+      <circle class="seat" cx="518" cy="164" r="9"/><circle class="seat" cx="518" cy="200" r="9"/>
+      <circle class="seat" cx="428" cy="126" r="9"/><circle class="seat" cx="472" cy="126" r="9"/>
+    </g>
+
+    <!-- área operacional -->
+    <g><rect class="desk" x="116" y="348" width="86" height="40" rx="6"/><circle class="seat" cx="159" cy="332" r="9"/></g>
+    <g><rect class="desk" x="116" y="424" width="86" height="40" rx="6"/><circle class="seat" cx="159" cy="480" r="9"/></g>
+    <g><rect class="desk" x="226" y="386" width="60" height="86" rx="6"/><circle class="seat" cx="300" cy="429" r="9"/></g>
+
+    <!-- copa / recepção -->
+    <g><rect class="desk" x="592" y="128" width="96" height="36" rx="8"/></g>
+    <g><rect class="desk" x="420" y="392" width="120" height="44" rx="8"/><circle class="seat" cx="480" cy="376" r="9"/></g>
+    <g><rect class="desk" x="600" y="452" width="96" height="44" rx="8"/><circle class="seat" cx="648" cy="436" r="9"/></g>
+  </g>
+
+  <!-- dispositivos conectados -->
+  <g>
+    <g transform="translate(140 138)"><rect class="dev-screen" width="28" height="18" rx="2"/><rect class="dev" y="19" width="34" height="3" rx="1.5" x="-3"/></g>
+    <g transform="translate(250 138)"><rect class="dev-screen dev-screen--b" width="28" height="18" rx="2"/><rect class="dev" y="19" width="34" height="3" rx="1.5" x="-3"/></g>
+    <g transform="translate(140 214)"><rect class="dev-screen dev-screen--c" width="28" height="18" rx="2"/><rect class="dev" y="19" width="34" height="3" rx="1.5" x="-3"/></g>
+    <g transform="translate(436 162)"><rect class="dev-screen dev-screen--b" width="30" height="20" rx="2"/></g>
+    <g transform="translate(144 358)"><rect class="dev-screen" width="28" height="18" rx="2"/><rect class="dev" y="19" width="34" height="3" rx="1.5" x="-3"/></g>
+    <g transform="translate(246 402)"><rect class="dev" width="14" height="22" rx="3"/></g>
+    <g transform="translate(462 404)"><rect class="dev-screen dev-screen--c" width="30" height="20" rx="2"/></g>
+    <g transform="translate(628 464)"><rect class="dev" width="14" height="22" rx="3"/></g>
+    <g transform="translate(624 138)"><rect class="dev-screen dev-screen--b" width="26" height="16" rx="2"/></g>
+  </g>
+
+  <!-- enlaces até os pontos de acesso -->
+  <g class="link">
+    <path d="M250 196 L154 148"/><path d="M250 196 L264 148"/><path d="M250 196 L154 224"/><path d="M250 196 L451 172"/>
+    <path d="M580 404 L477 414"/><path d="M580 404 L637 146"/><path d="M580 404 L635 475"/><path d="M580 404 L253 413"/>
+  </g>
+
+  <!-- ondas de cobertura -->
+  <g transform="translate(250 196)">
+    <circle class="ring" r="180"/><circle class="ring ring--2" r="180"/><circle class="ring ring--3" r="180"/>
+  </g>
+  <g transform="translate(580 404)">
+    <circle class="ring" r="168"/><circle class="ring ring--2" r="168"/><circle class="ring ring--3" r="168"/>
+  </g>
+
+  <!-- pontos de acesso -->
+  <g>
+    <circle class="ap-body" cx="250" cy="196" r="19"/><circle class="ap-core" cx="250" cy="196" r="7"/>
+    <circle class="ap-body" cx="580" cy="404" r="19"/><circle class="ap-core" cx="580" cy="404" r="7"/>
+  </g>
+</svg>

@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Bancada técnica vista de cima com notebook em terminal, switch de rede, cabos identificados e ferramenta de crimpar">
+  <defs>
+    <linearGradient id="sb-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#170d27"/><stop offset="1" stop-color="#0b0512"/>
+    </linearGradient>
+    <radialGradient id="sb-lamp" cx=".32" cy=".16" r=".62">
+      <stop offset="0" stop-color="#4FD8E0" stop-opacity=".20"/>
+      <stop offset=".55" stop-color="#6B3FA0" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#6B3FA0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sb-desk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#241738"/><stop offset="1" stop-color="#180f2b"/>
+    </linearGradient>
+    <linearGradient id="sb-screen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101d2c"/><stop offset="1" stop-color="#0b1421"/>
+    </linearGradient>
+    <style>
+      .metal { fill: #2e1e48; stroke: #F6F3FA; stroke-opacity: .16; }
+      .port { fill: #0f0a1a; stroke: #4FD8E0; stroke-opacity: .3; }
+      .led { fill: #4FD8E0; }
+      .term { fill: #4FD8E0; fill-opacity: .55; }
+      .term--dim { fill: #F6F3FA; fill-opacity: .28; }
+      .cord { fill: none; stroke-width: 5; stroke-linecap: round; }
+      .tag { fill: #F6F3FA; fill-opacity: .78; }
+      @media (prefers-reduced-motion: no-preference) {
+        .led { animation: bl 2.8s ease-in-out infinite; }
+        .led--b { animation-delay: .5s } .led--c { animation-delay: 1s } .led--d { animation-delay: 1.5s }
+        .caret { animation: ca 1.2s steps(2) infinite; }
+        .term { animation: tp 4.6s ease-in-out infinite; }
+        .term--2 { animation-delay: .4s } .term--3 { animation-delay: .8s } .term--4 { animation-delay: 1.2s }
+      }
+      @keyframes bl { 0%,100% { opacity: .3 } 50% { opacity: 1 } }
+      @keyframes ca { 0%,49% { opacity: 1 } 50%,100% { opacity: 0 } }
+      @keyframes tp { 0%,100% { fill-opacity: .35 } 50% { fill-opacity: .7 } }
+    </style>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#sb-bg)"/>
+
+  <!-- tampo da bancada -->
+  <rect x="40" y="40" width="720" height="520" rx="20" fill="url(#sb-desk)" stroke="#F6F3FA" stroke-opacity=".10"/>
+  <g stroke="#F6F3FA" stroke-opacity=".04">
+    <path d="M40 160 H760 M40 300 H760 M40 440 H760"/>
+  </g>
+  <!-- luz da luminária de bancada -->
+  <rect x="40" y="40" width="720" height="520" rx="20" fill="url(#sb-lamp)"/>
+
+  <!-- notebook aberto, visto de cima -->
+  <g transform="translate(96 108)">
+    <!-- tela -->
+    <rect class="metal" x="0" y="0" width="300" height="186" rx="10"/>
+    <rect x="12" y="12" width="276" height="162" rx="6" fill="url(#sb-screen)" stroke="#4FD8E0" stroke-opacity=".22"/>
+    <!-- terminal -->
+    <g>
+      <rect class="term" x="28" y="30" width="112" height="8" rx="4"/>
+      <rect class="term--dim" x="28" y="48" width="180" height="7" rx="3.5"/>
+      <rect class="term term--2" x="28" y="66" width="146" height="8" rx="4"/>
+      <rect class="term--dim" x="28" y="84" width="204" height="7" rx="3.5"/>
+      <rect class="term term--3" x="28" y="102" width="88" height="8" rx="4"/>
+      <rect class="term--dim" x="28" y="120" width="164" height="7" rx="3.5"/>
+      <rect class="term term--4" x="28" y="138" width="126" height="8" rx="4"/>
+      <rect class="caret" x="162" y="137" width="9" height="10" rx="1.5" fill="#4FD8E0"/>
+    </g>
+    <!-- teclado -->
+    <rect class="metal" x="6" y="196" width="288" height="150" rx="10"/>
+    <g fill="#1b1130" stroke="#F6F3FA" stroke-opacity=".08">
+      <rect x="24" y="212" width="16" height="13" rx="2.5"/><rect x="44" y="212" width="16" height="13" rx="2.5"/>
+      <rect x="64" y="212" width="16" height="13" rx="2.5"/><rect x="84" y="212" width="16" height="13" rx="2.5"/>
+      <rect x="104" y="212" width="16" height="13" rx="2.5"/><rect x="124" y="212" width="16" height="13" rx="2.5"/>
+      <rect x="144" y="212" width="16" height="13" rx="2.5"/><rect x="164" y="212" width="16" height="13" rx="2.5"/>
+      <rect x="184" y="212" width="16" height="13" rx="2.5"/><rect x="204" y="212" width="16" height="13" rx="2.5"/>
+      <rect x="224" y="212" width="16" height="13" rx="2.5"/><rect x="244" y="212" width="32" height="13" rx="2.5"/>
+
+      <rect x="24" y="230" width="22" height="13" rx="2.5"/><rect x="50" y="230" width="16" height="13" rx="2.5"/>
+      <rect x="70" y="230" width="16" height="13" rx="2.5"/><rect x="90" y="230" width="16" height="13" rx="2.5"/>
+      <rect x="110" y="230" width="16" height="13" rx="2.5"/><rect x="130" y="230" width="16" height="13" rx="2.5"/>
+      <rect x="150" y="230" width="16" height="13" rx="2.5"/><rect x="170" y="230" width="16" height="13" rx="2.5"/>
+      <rect x="190" y="230" width="16" height="13" rx="2.5"/><rect x="210" y="230" width="16" height="13" rx="2.5"/>
+      <rect x="230" y="230" width="16" height="13" rx="2.5"/><rect x="250" y="230" width="26" height="13" rx="2.5"/>
+
+      <rect x="24" y="248" width="26" height="13" rx="2.5"/><rect x="54" y="248" width="16" height="13" rx="2.5"/>
+      <rect x="74" y="248" width="16" height="13" rx="2.5"/><rect x="94" y="248" width="16" height="13" rx="2.5"/>
+      <rect x="114" y="248" width="16" height="13" rx="2.5"/><rect x="134" y="248" width="16" height="13" rx="2.5"/>
+      <rect x="154" y="248" width="16" height="13" rx="2.5"/><rect x="174" y="248" width="16" height="13" rx="2.5"/>
+      <rect x="194" y="248" width="16" height="13" rx="2.5"/><rect x="214" y="248" width="16" height="13" rx="2.5"/>
+      <rect x="234" y="248" width="42" height="13" rx="2.5"/>
+
+      <rect x="24" y="266" width="34" height="13" rx="2.5"/><rect x="62" y="266" width="16" height="13" rx="2.5"/>
+      <rect x="82" y="266" width="16" height="13" rx="2.5"/><rect x="102" y="266" width="16" height="13" rx="2.5"/>
+      <rect x="122" y="266" width="16" height="13" rx="2.5"/><rect x="142" y="266" width="16" height="13" rx="2.5"/>
+      <rect x="162" y="266" width="16" height="13" rx="2.5"/><rect x="182" y="266" width="16" height="13" rx="2.5"/>
+      <rect x="202" y="266" width="16" height="13" rx="2.5"/><rect x="222" y="266" width="54" height="13" rx="2.5"/>
+
+      <rect x="88" y="284" width="124" height="13" rx="2.5"/>
+    </g>
+    <rect x="96" y="306" width="108" height="30" rx="6" fill="#1b1130" stroke="#F6F3FA" stroke-opacity=".10"/>
+  </g>
+
+  <!-- switch de rede -->
+  <g transform="translate(452 128)">
+    <rect class="metal" x="0" y="0" width="252" height="96" rx="10"/>
+    <g class="port">
+      <rect x="18" y="20" width="20" height="16" rx="2.5"/><rect x="44" y="20" width="20" height="16" rx="2.5"/>
+      <rect x="70" y="20" width="20" height="16" rx="2.5"/><rect x="96" y="20" width="20" height="16" rx="2.5"/>
+      <rect x="122" y="20" width="20" height="16" rx="2.5"/><rect x="148" y="20" width="20" height="16" rx="2.5"/>
+      <rect x="18" y="44" width="20" height="16" rx="2.5"/><rect x="44" y="44" width="20" height="16" rx="2.5"/>
+      <rect x="70" y="44" width="20" height="16" rx="2.5"/><rect x="96" y="44" width="20" height="16" rx="2.5"/>
+      <rect x="122" y="44" width="20" height="16" rx="2.5"/><rect x="148" y="44" width="20" height="16" rx="2.5"/>
+    </g>
+    <g>
+      <circle class="led" cx="196" cy="28" r="3.6"/><circle class="led led--c" cx="212" cy="28" r="3.6"/>
+      <circle class="led led--b" cx="196" cy="52" r="3.6"/><circle class="led led--d" cx="212" cy="52" r="3.6"/>
+    </g>
+    <rect x="18" y="74" width="80" height="6" rx="3" fill="#F6F3FA" fill-opacity=".10"/>
+  </g>
+
+  <!-- patch cords identificados, ligando o switch ao notebook e à parede -->
+  <g class="cord">
+    <path d="M470 226 C440 300 380 316 318 330" stroke="#4FD8E0" stroke-opacity=".55"/>
+    <path d="M520 226 C512 320 452 372 372 392" stroke="#4FD8E0" stroke-opacity=".35"/>
+    <path d="M664 226 C688 320 660 420 566 456" stroke="#F6F3FA" stroke-opacity=".22"/>
+  </g>
+  <g class="tag">
+    <rect x="392" y="300" width="30" height="14" rx="3"/>
+    <rect x="424" y="366" width="30" height="14" rx="3" fill-opacity=".6"/>
+    <rect x="654" y="380" width="30" height="14" rx="3" fill-opacity=".45"/>
+  </g>
+
+  <!-- rolo de cabo de rede e conectores RJ45 soltos sobre a bancada -->
+  <g transform="translate(500 452)">
+    <circle r="62" fill="none" stroke="#4FD8E0" stroke-opacity=".38" stroke-width="9"/>
+    <circle r="46" fill="none" stroke="#4FD8E0" stroke-opacity=".26" stroke-width="9"/>
+    <circle r="30" fill="none" stroke="#4FD8E0" stroke-opacity=".16" stroke-width="9"/>
+    <path d="M60 -14 C96 -30 122 -12 136 18" fill="none" stroke="#4FD8E0" stroke-opacity=".38" stroke-width="9" stroke-linecap="round"/>
+    <g transform="translate(128 12)" fill="#1d1333" stroke="#F6F3FA" stroke-opacity=".22">
+      <rect x="0" y="0" width="34" height="26" rx="4"/>
+      <rect x="10" y="-8" width="14" height="10" rx="2"/>
+    </g>
+  </g>
+  <g transform="translate(672 336)" fill="#1d1333" stroke="#F6F3FA" stroke-opacity=".18">
+    <rect x="0" y="0" width="30" height="24" rx="4"/><rect x="9" y="-7" width="12" height="9" rx="2"/>
+    <rect x="-6" y="40" width="30" height="24" rx="4" fill-opacity=".8"/><rect x="3" y="33" width="12" height="9" rx="2" fill-opacity=".8"/>
+  </g>
+
+  <!-- caderno de anotações -->
+  <g transform="translate(96 470)">
+    <rect class="metal" x="0" y="0" width="180" height="76" rx="8" fill="#1d1333"/>
+    <g fill="#F6F3FA" fill-opacity=".14">
+      <rect x="18" y="18" width="120" height="7" rx="3.5"/>
+      <rect x="18" y="34" width="144" height="7" rx="3.5"/>
+      <rect x="18" y="50" width="96" height="7" rx="3.5"/>
+    </g>
+  </g>
+</svg>

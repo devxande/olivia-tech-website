@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Levantamento da rede existente sob análise">
+  <defs>
+    <linearGradient id="dg-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a1029"/><stop offset="1" stop-color="#0d0716"/>
+    </linearGradient>
+    <style>
+      .node { fill: #4FD8E0; }
+      .link { stroke: #4FD8E0; stroke-opacity: .3; stroke-width: 1.4; fill: none; }
+      .lens { fill: none; stroke: #F6F3FA; stroke-opacity: .55; stroke-width: 3; }
+      @media (prefers-reduced-motion: no-preference) {
+        .scan { animation: sc 5s ease-in-out infinite; }
+        .node { animation: np 3s ease-in-out infinite; }
+        .node--b { animation-delay: .6s } .node--c { animation-delay: 1.2s } .node--d { animation-delay: 1.8s }
+      }
+      @keyframes sc { 0%,100% { transform: translate(0,0) } 50% { transform: translate(150px,26px) } }
+      @keyframes np { 0%,100% { opacity: .45 } 50% { opacity: 1 } }
+    </style>
+  </defs>
+  <rect width="640" height="360" rx="0" fill="url(#dg-bg)"/>
+  <g stroke="#F6F3FA" stroke-opacity=".05">
+    <path d="M0 90 H640 M0 180 H640 M0 270 H640 M160 0 V360 M320 0 V360 M480 0 V360"/>
+  </g>
+
+  <!-- topologia levantada -->
+  <g class="link">
+    <path d="M120 110 L240 76 M240 76 L360 128 M120 110 L200 216 M200 216 L330 240 M360 128 L330 240 M360 128 L482 180 M330 240 L440 288"/>
+  </g>
+  <g>
+    <circle class="node" cx="120" cy="110" r="5.5"/><circle class="node node--b" cx="240" cy="76" r="5.5"/>
+    <circle class="node node--c" cx="360" cy="128" r="6.5"/><circle class="node node--d" cx="200" cy="216" r="5.5"/>
+    <circle class="node node--b" cx="330" cy="240" r="6"/><circle class="node node--c" cx="482" cy="180" r="5.5"/>
+    <circle class="node node--d" cx="440" cy="288" r="5.5"/>
+  </g>
+
+  <!-- lente de análise -->
+  <g class="scan">
+    <circle cx="196" cy="150" r="62" fill="#4FD8E0" fill-opacity=".08"/>
+    <circle class="lens" cx="196" cy="150" r="62"/>
+    <path class="lens" d="M240 194 L286 240" stroke-linecap="round"/>
+  </g>
+</svg>

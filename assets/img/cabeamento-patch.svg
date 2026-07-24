@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Patch panel com portas identificadas e cabos de rede organizados">
+  <defs>
+    <linearGradient id="cp-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#150c24"/><stop offset="1" stop-color="#0a0511"/>
+    </linearGradient>
+    <radialGradient id="cp-glow" cx=".68" cy=".22" r=".6">
+      <stop offset="0" stop-color="#4FD8E0" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#4FD8E0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cp-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#33214e"/><stop offset="1" stop-color="#1b1130"/>
+    </linearGradient>
+    <style>
+      .port { fill: #0d0818; stroke: #4FD8E0; stroke-opacity: .28; stroke-width: 2; }
+      .led { fill: #4FD8E0; }
+      .cord { fill: none; stroke-width: 7; stroke-linecap: round; }
+      .tag { fill: #F6F3FA; fill-opacity: .55; }
+      @media (prefers-reduced-motion: no-preference) {
+        .led { animation: bl 3.4s ease-in-out infinite; }
+        .led--b { animation-delay: .6s } .led--c { animation-delay: 1.2s }
+        .led--d { animation-delay: 1.8s } .led--e { animation-delay: 2.4s }
+      }
+      @keyframes bl { 0%,100% { opacity: .25 } 50% { opacity: 1 } }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#cp-bg)"/>
+  <rect width="1600" height="900" fill="url(#cp-glow)"/>
+
+  <!-- trilhos do rack -->
+  <g fill="#1a1029" stroke="#F6F3FA" stroke-opacity=".07">
+    <rect x="90" y="60" width="46" height="780" rx="8"/>
+    <rect x="1464" y="60" width="46" height="780" rx="8"/>
+  </g>
+
+  <!-- patch panel superior -->
+  <g>
+    <rect x="150" y="150" width="1300" height="190" rx="14" fill="url(#cp-panel)" stroke="#F6F3FA" stroke-opacity=".14"/>
+    <g class="port">
+      <rect x="200" y="196" width="46" height="36" rx="5"/><rect x="256" y="196" width="46" height="36" rx="5"/>
+      <rect x="312" y="196" width="46" height="36" rx="5"/><rect x="368" y="196" width="46" height="36" rx="5"/>
+      <rect x="424" y="196" width="46" height="36" rx="5"/><rect x="480" y="196" width="46" height="36" rx="5"/>
+      <rect x="536" y="196" width="46" height="36" rx="5"/><rect x="592" y="196" width="46" height="36" rx="5"/>
+      <rect x="648" y="196" width="46" height="36" rx="5"/><rect x="704" y="196" width="46" height="36" rx="5"/>
+      <rect x="760" y="196" width="46" height="36" rx="5"/><rect x="816" y="196" width="46" height="36" rx="5"/>
+      <rect x="872" y="196" width="46" height="36" rx="5"/><rect x="928" y="196" width="46" height="36" rx="5"/>
+      <rect x="984" y="196" width="46" height="36" rx="5"/><rect x="1040" y="196" width="46" height="36" rx="5"/>
+      <rect x="1096" y="196" width="46" height="36" rx="5"/><rect x="1152" y="196" width="46" height="36" rx="5"/>
+      <rect x="1208" y="196" width="46" height="36" rx="5"/><rect x="1264" y="196" width="46" height="36" rx="5"/>
+      <rect x="1320" y="196" width="46" height="36" rx="5"/><rect x="1376" y="196" width="46" height="36" rx="5"/>
+    </g>
+    <!-- etiquetas de identificação -->
+    <g class="tag">
+      <rect x="200" y="252" width="46" height="12" rx="4"/><rect x="312" y="252" width="46" height="12" rx="4" fill-opacity=".38"/>
+      <rect x="424" y="252" width="46" height="12" rx="4"/><rect x="536" y="252" width="46" height="12" rx="4" fill-opacity=".38"/>
+      <rect x="648" y="252" width="46" height="12" rx="4"/><rect x="760" y="252" width="46" height="12" rx="4" fill-opacity=".38"/>
+      <rect x="872" y="252" width="46" height="12" rx="4"/><rect x="984" y="252" width="46" height="12" rx="4" fill-opacity=".38"/>
+      <rect x="1096" y="252" width="46" height="12" rx="4"/><rect x="1208" y="252" width="46" height="12" rx="4" fill-opacity=".38"/>
+      <rect x="1320" y="252" width="46" height="12" rx="4"/>
+    </g>
+    <g>
+      <circle class="led" cx="223" cy="180" r="5"/><circle class="led led--c" cx="447" cy="180" r="5"/>
+      <circle class="led led--b" cx="671" cy="180" r="5"/><circle class="led led--d" cx="895" cy="180" r="5"/>
+      <circle class="led led--e" cx="1119" cy="180" r="5"/><circle class="led led--b" cx="1343" cy="180" r="5"/>
+    </g>
+  </g>
+
+  <!-- organizador de cabos -->
+  <rect x="150" y="376" width="1300" height="54" rx="12" fill="#191029" stroke="#F6F3FA" stroke-opacity=".10"/>
+  <g fill="#0f0a1a" stroke="#F6F3FA" stroke-opacity=".08">
+    <rect x="230" y="390" width="60" height="26" rx="8"/><rect x="470" y="390" width="60" height="26" rx="8"/>
+    <rect x="710" y="390" width="60" height="26" rx="8"/><rect x="950" y="390" width="60" height="26" rx="8"/>
+    <rect x="1190" y="390" width="60" height="26" rx="8"/>
+  </g>
+
+  <!-- cabos descendo do painel para o organizador e para o switch -->
+  <g class="cord">
+    <path d="M223 232 C223 300 250 330 260 390" stroke="#4FD8E0" stroke-opacity=".5"/>
+    <path d="M335 232 C335 310 288 336 268 390" stroke="#4FD8E0" stroke-opacity=".32"/>
+    <path d="M447 232 C447 300 490 332 500 390" stroke="#4FD8E0" stroke-opacity=".45"/>
+    <path d="M559 232 C559 312 512 340 508 390" stroke="#F6F3FA" stroke-opacity=".16"/>
+    <path d="M671 232 C671 300 730 330 740 390" stroke="#4FD8E0" stroke-opacity=".4"/>
+    <path d="M783 232 C783 316 752 348 748 390" stroke="#F6F3FA" stroke-opacity=".14"/>
+    <path d="M895 232 C895 300 970 332 980 390" stroke="#4FD8E0" stroke-opacity=".45"/>
+    <path d="M1007 232 C1007 314 992 348 988 390" stroke="#4FD8E0" stroke-opacity=".26"/>
+    <path d="M1119 232 C1119 300 1210 332 1220 390" stroke="#4FD8E0" stroke-opacity=".38"/>
+    <path d="M1231 232 C1231 316 1232 350 1228 390" stroke="#F6F3FA" stroke-opacity=".14"/>
+
+    <path d="M260 430 C260 500 340 520 420 556" stroke="#4FD8E0" stroke-opacity=".4"/>
+    <path d="M500 430 C500 500 540 520 600 556" stroke="#4FD8E0" stroke-opacity=".3"/>
+    <path d="M740 430 C740 500 760 520 790 556" stroke="#4FD8E0" stroke-opacity=".35"/>
+    <path d="M980 430 C980 500 960 520 940 556" stroke="#F6F3FA" stroke-opacity=".14"/>
+    <path d="M1220 430 C1220 500 1160 522 1100 556" stroke="#4FD8E0" stroke-opacity=".28"/>
+  </g>
+
+  <!-- switch inferior -->
+  <g>
+    <rect x="150" y="556" width="1300" height="150" rx="14" fill="url(#cp-panel)" stroke="#F6F3FA" stroke-opacity=".14"/>
+    <g class="port">
+      <rect x="220" y="600" width="42" height="32" rx="5"/><rect x="272" y="600" width="42" height="32" rx="5"/>
+      <rect x="324" y="600" width="42" height="32" rx="5"/><rect x="376" y="600" width="42" height="32" rx="5"/>
+      <rect x="428" y="600" width="42" height="32" rx="5"/><rect x="480" y="600" width="42" height="32" rx="5"/>
+      <rect x="532" y="600" width="42" height="32" rx="5"/><rect x="584" y="600" width="42" height="32" rx="5"/>
+      <rect x="636" y="600" width="42" height="32" rx="5"/><rect x="688" y="600" width="42" height="32" rx="5"/>
+      <rect x="740" y="600" width="42" height="32" rx="5"/><rect x="792" y="600" width="42" height="32" rx="5"/>
+      <rect x="844" y="600" width="42" height="32" rx="5"/><rect x="896" y="600" width="42" height="32" rx="5"/>
+      <rect x="948" y="600" width="42" height="32" rx="5"/><rect x="1000" y="600" width="42" height="32" rx="5"/>
+      <rect x="1052" y="600" width="42" height="32" rx="5"/><rect x="1104" y="600" width="42" height="32" rx="5"/>
+    </g>
+    <g>
+      <circle class="led" cx="1220" cy="602" r="5"/><circle class="led led--b" cx="1244" cy="602" r="5"/>
+      <circle class="led led--c" cx="1220" cy="630" r="5"/><circle class="led led--d" cx="1244" cy="630" r="5"/>
+    </g>
+    <rect x="1300" y="596" width="110" height="10" rx="5" fill="#F6F3FA" fill-opacity=".10"/>
+    <rect x="1300" y="620" width="76" height="10" rx="5" fill="#F6F3FA" fill-opacity=".07"/>
+  </g>
+
+  <!-- sombra inferior, para o conteúdo do site respirar -->
+  <rect y="740" width="1600" height="160" fill="#0a0511" opacity=".55"/>
+</svg>

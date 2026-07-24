@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Firewall de perímetro filtrando o tráfego que entra e sai da rede">
+  <defs>
+    <linearGradient id="fw-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#170d27"/><stop offset="1" stop-color="#0c0614"/>
+    </linearGradient>
+    <linearGradient id="fw-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4FD8E0" stop-opacity=".30"/>
+      <stop offset=".5" stop-color="#4FD8E0" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#4FD8E0" stop-opacity=".30"/>
+    </linearGradient>
+    <linearGradient id="fw-panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22163a"/><stop offset="1" stop-color="#180f2c"/>
+    </linearGradient>
+    <style>
+      .pkt { fill: #4FD8E0; }
+      .pkt--blocked { fill: #F6F3FA; fill-opacity: .35; }
+      .rule { fill: #F6F3FA; fill-opacity: .13; }
+      .allow { stroke: #4FD8E0; stroke-width: 2; fill: none; stroke-linecap: round; }
+      .deny { stroke: #F6F3FA; stroke-opacity: .3; stroke-width: 2; fill: none; stroke-linecap: round; }
+      @media (prefers-reduced-motion: no-preference) {
+        .pkt { animation: pass 4.5s ease-in-out infinite; }
+        .pkt--b { animation-delay: 1.1s } .pkt--c { animation-delay: 2.2s }
+        .pkt--blocked { animation: bounce 4.5s ease-in-out infinite; }
+        .pkt--blocked.pkt--b { animation-delay: 1.6s }
+        .wall { animation: shimmer 5s ease-in-out infinite; }
+        .rule--on { animation: on 3s ease-in-out infinite; }
+        .rule--b { animation-delay: .7s } .rule--c { animation-delay: 1.4s }
+      }
+      @keyframes pass { 0% { transform: translateX(0); opacity: 0 } 15% { opacity: 1 } 85% { opacity: 1 } 100% { transform: translateX(470px); opacity: 0 } }
+      @keyframes bounce { 0% { transform: translateX(0); opacity: 0 } 20% { opacity: 1 } 55% { transform: translateX(228px); opacity: 1 } 75% { transform: translateX(150px); opacity: 0 } 100% { transform: translateX(150px); opacity: 0 } }
+      @keyframes shimmer { 0%,100% { opacity: .7 } 50% { opacity: 1 } }
+      @keyframes on { 0%,100% { opacity: .4 } 50% { opacity: 1 } }
+    </style>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#fw-bg)"/>
+  <g stroke="#F6F3FA" stroke-opacity=".05">
+    <path d="M0 120 H800 M0 240 H800 M0 360 H800 M0 480 H800"/>
+  </g>
+
+  <!-- lado externo: origens de tráfego -->
+  <g fill="#F6F3FA" fill-opacity=".10">
+    <circle cx="72" cy="180" r="18"/><circle cx="72" cy="300" r="18"/><circle cx="72" cy="420" r="18"/>
+  </g>
+
+  <!-- pacotes -->
+  <g>
+    <rect class="pkt" x="104" y="172" width="16" height="16" rx="4"/>
+    <rect class="pkt pkt--b" x="104" y="292" width="16" height="16" rx="4"/>
+    <rect class="pkt pkt--blocked" x="104" y="412" width="16" height="16" rx="4"/>
+    <rect class="pkt pkt--c" x="104" y="352" width="16" height="16" rx="4" fill-opacity=".7"/>
+    <rect class="pkt pkt--blocked pkt--b" x="104" y="232" width="16" height="16" rx="4"/>
+  </g>
+
+  <!-- muro do firewall -->
+  <g class="wall">
+    <rect x="330" y="90" width="72" height="420" rx="16" fill="url(#fw-wall)" stroke="#4FD8E0" stroke-opacity=".45"/>
+    <g fill="#4FD8E0" fill-opacity=".22">
+      <rect x="344" y="110" width="44" height="26" rx="5"/><rect x="344" y="146" width="44" height="26" rx="5"/>
+      <rect x="344" y="182" width="44" height="26" rx="5"/><rect x="344" y="218" width="44" height="26" rx="5"/>
+      <rect x="344" y="254" width="44" height="26" rx="5"/><rect x="344" y="290" width="44" height="26" rx="5"/>
+      <rect x="344" y="326" width="44" height="26" rx="5"/><rect x="344" y="362" width="44" height="26" rx="5"/>
+      <rect x="344" y="398" width="44" height="26" rx="5"/><rect x="344" y="434" width="44" height="26" rx="5"/>
+    </g>
+    <!-- escudo -->
+    <g transform="translate(342 262)" fill="#0f0a1a" stroke="#4FD8E0" stroke-opacity=".8" stroke-width="2.4">
+      <path d="M24 4 L44 12 V30 C44 46 34 54 24 58 C14 54 4 46 4 30 V12 Z"/>
+      <path d="M15 30 L21 36 L34 22" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- lado interno: rede protegida -->
+  <g>
+    <rect x="470" y="120" width="260" height="150" rx="14" fill="url(#fw-panel)" stroke="#F6F3FA" stroke-opacity=".10"/>
+    <rect x="470" y="300" width="260" height="180" rx="14" fill="url(#fw-panel)" stroke="#F6F3FA" stroke-opacity=".10"/>
+
+    <!-- regras ativas -->
+    <g>
+      <circle class="rule--on" cx="498" cy="152" r="4.6" fill="#4FD8E0"/><rect class="rule" x="516" y="147" width="130" height="9" rx="4.5"/>
+      <circle class="rule--on rule--b" cx="498" cy="184" r="4.6" fill="#4FD8E0"/><rect class="rule" x="516" y="179" width="172" height="9" rx="4.5"/>
+      <circle class="rule--on rule--c" cx="498" cy="216" r="4.6" fill="#4FD8E0"/><rect class="rule" x="516" y="211" width="108" height="9" rx="4.5"/>
+      <circle cx="498" cy="248" r="4.6" fill="#F6F3FA" fill-opacity=".2"/><rect class="rule" x="516" y="243" width="146" height="9" rx="4.5"/>
+    </g>
+
+    <!-- segmentos internos -->
+    <g fill="#F6F3FA" fill-opacity=".07" stroke="#4FD8E0" stroke-opacity=".22">
+      <rect x="498" y="330" width="94" height="56" rx="9"/>
+      <rect x="610" y="330" width="94" height="56" rx="9"/>
+      <rect x="498" y="404" width="206" height="52" rx="9"/>
+    </g>
+    <g class="allow" stroke-opacity=".35">
+      <path d="M545 386 V404 M657 386 V404"/>
+    </g>
+  </g>
+
+  <!-- trilhas de tráfego -->
+  <g>
+    <path class="allow" stroke-opacity=".25" d="M128 180 H330 M402 180 H470"/>
+    <path class="allow" stroke-opacity=".25" d="M128 300 H330 M402 300 H470"/>
+    <path class="deny" stroke-dasharray="5 7" d="M128 420 H322"/>
+  </g>
+</svg>

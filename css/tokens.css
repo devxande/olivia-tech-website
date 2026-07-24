@@ -1,54 +1,26 @@
 /* Olivia Tech — Design tokens (colors, typography, spacing, effects) */
 
 /* Fontes servidas localmente (subset latin) — sem CDN externo.
+   Cada arquivo é uma fonte VARIÁVEL: um único woff2 por família cobre toda a
+   faixa de pesos usada, declarada como intervalo em font-weight (ex.: 400 700).
+   Antes havia um arquivo por peso, mas eram cópias byte-a-byte do mesmo woff2
+   variável — 6 downloads de ~237 KB para o que 2 (~71 KB) resolvem.
    unicode-range = subset "latin" do Google Fonts, cobre todo o pt-BR
    (Latin-1 + pontuação geral U+2000-206F: – — · " " …). */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 400 700;
   font-display: swap;
-  src: url('../assets/fonts/Inter-400.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../assets/fonts/Inter-500.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('../assets/fonts/Inter-600.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../assets/fonts/Inter-700.woff2') format('woff2');
+  src: url('../assets/fonts/Inter.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
   font-family: 'Manrope';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 700 800;
   font-display: swap;
-  src: url('../assets/fonts/Manrope-700.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url('../assets/fonts/Manrope-800.woff2') format('woff2');
+  src: url('../assets/fonts/Manrope.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -182,4 +154,25 @@
   /* Escala tipográfica estendida */
   --text-7xl: 82px;
   --tracking-tighter: -0.03em;
+
+  /* ---- Mídia editorial (ilustrações vetoriais próprias) ---- */
+  --media-ratio: 16 / 10;          /* moldura horizontal padrão */
+  --media-ratio-wide: 21 / 9;      /* faixas full-bleed */
+  --media-bg: var(--purple-950);
+  /* véu sobre a arte, para o card não competir com o texto ao lado */
+  --media-veil: linear-gradient(180deg, rgba(18, 10, 28, 0) 45%, rgba(18, 10, 28, .45) 100%);
+  /* faixa: escurece a esquerda, onde fica o texto, e libera a arte à direita */
+  --band-veil: linear-gradient(90deg, rgba(12, 6, 20, .96) 0%, rgba(12, 6, 20, .82) 36%, rgba(12, 6, 20, .46) 72%, rgba(12, 6, 20, .34) 100%);
+  --spotlight: rgba(79, 216, 224, .16);
+  --duration-media: 620ms;
+
+  /* ---- Hero: malha animada e vídeo de fundo opcional ---- */
+  --mesh-node: 79, 216, 224;       /* ciano em partes, para compor alfa no canvas */
+  --mesh-max-opacity: .55;         /* teto do brilho da malha sobre a aurora */
+  /* véu sobre o vídeo: escurece e puxa para o roxo da marca, preservando
+     contraste AAA no título (medido: 15:1 sobre o frame mais claro) */
+  --hero-video-veil:
+    linear-gradient(180deg, rgba(18, 10, 28, .78) 0%, rgba(18, 10, 28, .88) 100%),
+    radial-gradient(70% 60% at 25% 40%, rgba(30, 18, 48, .55), transparent 75%);
+  --hero-video-opacity: .5;
 }

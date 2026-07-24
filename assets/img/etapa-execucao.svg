@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Execução das mudanças com verificação de cada item entregue">
+  <defs>
+    <linearGradient id="ex-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a1029"/><stop offset="1" stop-color="#0d0716"/>
+    </linearGradient>
+    <linearGradient id="ex-rack" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a1b40"/><stop offset="1" stop-color="#170e2b"/>
+    </linearGradient>
+    <style>
+      .led { fill: #4FD8E0; }
+      .check { stroke: #4FD8E0; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 30; }
+      .row { fill: #F6F3FA; fill-opacity: .14; }
+      @media (prefers-reduced-motion: no-preference) {
+        .led { animation: bl 2.8s ease-in-out infinite; }
+        .led--b { animation-delay: .6s } .led--c { animation-delay: 1.2s } .led--d { animation-delay: 1.8s }
+        .check { animation: dr 4.5s ease-in-out infinite; }
+        .check--b { animation-delay: .5s } .check--c { animation-delay: 1s }
+        .pulse { animation: pu 4.5s ease-in-out infinite; }
+      }
+      @keyframes bl { 0%,100% { opacity: .35 } 50% { opacity: 1 } }
+      @keyframes dr { 0% { stroke-dashoffset: 30 } 40%,100% { stroke-dashoffset: 0 } }
+      @keyframes pu { 0%,100% { opacity: .12 } 50% { opacity: .3 } }
+    </style>
+  </defs>
+  <rect width="640" height="360" fill="url(#ex-bg)"/>
+
+  <!-- rack em manutenção -->
+  <rect class="pulse" x="52" y="40" width="208" height="280" rx="18" fill="#4FD8E0" opacity=".12"/>
+  <rect x="64" y="52" width="184" height="256" rx="14" fill="url(#ex-rack)" stroke="#F6F3FA" stroke-opacity=".12"/>
+  <g stroke="#F6F3FA" stroke-opacity=".08">
+    <rect x="78" y="72" width="156" height="34" rx="6" fill="#1d1333"/>
+    <rect x="78" y="116" width="156" height="34" rx="6" fill="#1d1333"/>
+    <rect x="78" y="160" width="156" height="34" rx="6" fill="#1d1333"/>
+    <rect x="78" y="204" width="156" height="34" rx="6" fill="#1d1333"/>
+    <rect x="78" y="248" width="156" height="34" rx="6" fill="#1d1333"/>
+  </g>
+  <g>
+    <circle class="led" cx="216" cy="89" r="3.4"/>
+    <circle class="led led--b" cx="216" cy="133" r="3.4"/>
+    <circle class="led led--c" cx="216" cy="177" r="3.4"/>
+    <circle class="led led--d" cx="216" cy="221" r="3.4"/>
+    <circle class="led led--b" cx="216" cy="265" r="3.4"/>
+  </g>
+
+  <!-- checklist de entrega -->
+  <g transform="translate(320 96)">
+    <g>
+      <rect x="0" y="-14" width="34" height="34" rx="9" fill="#4FD8E0" fill-opacity=".12" stroke="#4FD8E0" stroke-opacity=".38"/>
+      <path class="check" d="M9 4 L15 10 L26 -2"/>
+      <rect class="row" x="52" y="-6" width="196" height="10" rx="5"/>
+    </g>
+    <g transform="translate(0 68)">
+      <rect x="0" y="-14" width="34" height="34" rx="9" fill="#4FD8E0" fill-opacity=".12" stroke="#4FD8E0" stroke-opacity=".38"/>
+      <path class="check check--b" d="M9 4 L15 10 L26 -2"/>
+      <rect class="row" x="52" y="-6" width="160" height="10" rx="5"/>
+    </g>
+    <g transform="translate(0 136)">
+      <rect x="0" y="-14" width="34" height="34" rx="9" fill="#4FD8E0" fill-opacity=".12" stroke="#4FD8E0" stroke-opacity=".38"/>
+      <path class="check check--c" d="M9 4 L15 10 L26 -2"/>
+      <rect class="row" x="52" y="-6" width="184" height="10" rx="5"/>
+    </g>
+  </g>
+</svg>
