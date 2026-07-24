@@ -29,6 +29,7 @@
     setupSpotlight();
     setupNavbarState();
     setupMobileNav();
+    setupWhatsappLinks();
     setupFooterYear();
   });
 
@@ -514,8 +515,20 @@
 
   // --- Contact form -------------------------------------------------------
 
-  // Número de WhatsApp que recebe as solicitações (formato internacional, só dígitos).
+  // Fonte única do número de WhatsApp (formato internacional, só dígitos).
+  // Para trocar o número, altere APENAS esta linha: o setupWhatsappLinks()
+  // preenche todos os links marcados com data-wa a partir dela, e o formulário
+  // monta a URL com a mensagem usando a mesma constante. Os href no HTML são
+  // apenas fallback para o caso raro de o JS não rodar.
   var WHATSAPP_NUMBER = '5561981399376';
+
+  // Preenche os links simples de WhatsApp (data-wa) a partir da constante acima.
+  function setupWhatsappLinks() {
+    var url = 'https://wa.me/' + WHATSAPP_NUMBER;
+    document.querySelectorAll('a[data-wa]').forEach(function (a) {
+      a.setAttribute('href', url);
+    });
+  }
 
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

@@ -1162,6 +1162,50 @@ textarea.field__control { resize: vertical; }
   color: var(--color-text-inverse-muted);
 }
 
+/* ---------- Página 404 ---------- */
+.error-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-16) var(--container-pad);
+  background: var(--color-bg-brand);
+  text-align: center;
+}
+.error-page__inner {
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+.error-page .brand { text-decoration: none; margin-bottom: var(--space-4); }
+.error-page__code {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0;
+}
+.error-page__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-inverse);
+  margin: 0;
+}
+.error-page__text {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-inverse-muted);
+  margin: 0;
+}
+.error-page__actions { margin-top: var(--space-4); }
+
 /* ============================================================
    Interações e microanimações (progressivas, degradam com segurança)
    ============================================================ */
