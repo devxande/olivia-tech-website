@@ -36,7 +36,6 @@ No site publicado, no DevTools:
 
 ## Limitação
 
-O Web Analytics mede **páginas**, não eventos personalizados. Para medir cliques
-específicos (ex.: CTA "Solicitar diagnóstico" vs "Falar no WhatsApp"), seria
-preciso outra abordagem — por exemplo, registrar o clique via a Function
-`/contact` ou um endpoint próprio. Fica como evolução futura, se necessário.
+O Web Analytics mede **páginas**, não eventos personalizados. O rastreio de
+cliques nos CTAs (qual botão e qual posição convertem) é feito por conta própria
+pela Function `/event` — ver `docs/rastreio-ctas.md`.

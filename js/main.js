@@ -30,8 +30,39 @@
     setupNavbarState();
     setupMobileNav();
     setupWhatsappLinks();
+    setupCtaTracking();
     setupFooterYear();
   });
+
+  // Rastreio de cliques nos CTAs — mede qual botão e posição convertem.
+  // Delegação no documento: pega qualquer [data-cta], inclusive os links de
+  // WhatsApp cujo href é reescrito depois por setupWhatsappLinks().
+  function setupCtaTracking() {
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest ? e.target.closest('[data-cta]') : null;
+      if (!el) return;
+      sendEvent(el.getAttribute('data-cta'), el.getAttribute('data-cta-local'));
+    });
+  }
+
+  // Envio best-effort: sendBeacon sobrevive à saída da página (o CTA do
+  // WhatsApp abre outra aba/app), e nunca bloqueia nem quebra a navegação.
+  function sendEvent(label, location) {
+    if (!label || !location) return;
+    var body = JSON.stringify({ event: 'cta_click', label: label, location: location });
+    try {
+      if (navigator.sendBeacon) {
+        var blob = new Blob([body], { type: 'application/json' });
+        if (navigator.sendBeacon('/event', blob)) return;
+      }
+      fetch('/event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: body,
+        keepalive: true
+      }).catch(function () {});
+    } catch (_) {}
+  }
 
   // Ano do rodapé (movido do HTML inline para permitir CSP sem 'unsafe-inline').
   function setupFooterYear() {

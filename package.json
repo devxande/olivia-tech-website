@@ -9,6 +9,7 @@
     "db:create": "npx --yes wrangler d1 create olivia-tech-leads",
     "db:schema": "npx --yes wrangler d1 execute olivia-tech-leads --remote --file=db/schema.sql",
     "leads": "npx --yes wrangler d1 execute olivia-tech-leads --remote --command=\"SELECT id, created_at, name, company, email, phone FROM leads ORDER BY created_at DESC LIMIT 50\"",
+    "events": "npx --yes wrangler d1 execute olivia-tech-leads --remote --command=\"SELECT label, location, COUNT(*) AS cliques, MAX(created_at) AS ultimo FROM events GROUP BY label, location ORDER BY cliques DESC\"",
     "dev": "npx --yes wrangler pages dev . --d1=DB"
   },
   "devDependencies": {
