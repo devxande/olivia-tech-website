@@ -169,7 +169,7 @@ main:focus { outline: none; }
   justify-content: space-between;
   gap: var(--space-4);
 }
-.brand { display: flex; align-items: center; gap: 10px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
 .brand svg { transition: transform var(--duration-base) var(--ease-out); }
 .brand:hover svg { transform: rotate(-8deg); }
 .brand__name {

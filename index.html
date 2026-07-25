@@ -147,6 +147,7 @@
 <body>
 
   <!-- Pula a navegação e vai direto ao conteúdo (visível só ao focar via teclado) -->
+  <span id="topo" aria-hidden="true"></span>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <!-- Barra de progresso de rolagem (decorativa) -->
@@ -155,13 +156,13 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="navbar__inner">
-      <div class="brand">
+      <a class="brand" href="#topo" aria-label="Olivia Tech — voltar ao início">
         <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true">
           <path d="M 45.79 43.57 A 18 18 0 1 1 45.79 20.43" fill="none" stroke="#F6F3FA" stroke-width="6.4" stroke-linecap="round"/>
           <path d="M 45.79 20.43 A 18 18 0 0 1 45.79 43.57" fill="none" stroke="#4FD8E0" stroke-width="6.4" stroke-linecap="round"/>
         </svg>
         <span class="brand__name">Olivia Tech</span>
-      </div>
+      </a>
       <nav class="navbar__links" id="primary-nav" aria-label="Navegação principal">
         <a href="#servicos">Serviços</a>
         <a href="#sobre">Sobre</a>
