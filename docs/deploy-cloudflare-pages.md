@@ -144,7 +144,7 @@ O domínio `oliviatech.com.br` está no Registro.br. Para apontá-lo ao Cloudfla
 Depois do primeiro deploy (na URL `*.pages.dev` e, em seguida, no domínio próprio):
 
 - [ ] Home carrega com CSS, JS, ícones (SVG inline) e fontes locais renderizados.
-- [ ] Nenhuma requisição a domínios externos (verificar aba Network: sem `unpkg`, `googleapis`, `gstatic`).
+- [ ] Nenhuma requisição a domínios externos além do beacon do Cloudflare Web Analytics (`static.cloudflareinsights.com` / `cloudflareinsights.com`). Sem `unpkg`, `googleapis`, `gstatic`.
 - [ ] CTAs "Solicitar diagnóstico" rolam até a seção de contato.
 - [ ] Formulário: submit vazio bloqueia; envio válido abre o WhatsApp preenchido.
 - [ ] Console do navegador sem erros (inclusive sem violações de CSP).

@@ -1,9 +1,11 @@
 # Cloudflare Pages — cabeçalhos de segurança (site estático)
-# Todos os recursos (CSS, JS, fontes, ícones SVG) são servidos do próprio
-# domínio: não há dependências externas, então a CSP pode ser estrita.
+# Recursos próprios (CSS, JS, fontes, ícones SVG) são servidos do domínio.
+# Única exceção externa: o beacon do Cloudflare Web Analytics — domínios do
+# próprio Cloudflare (static.cloudflareinsights.com / cloudflareinsights.com),
+# sem cookies. Liberação cirúrgica em script-src e connect-src.
 
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; form-action 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
