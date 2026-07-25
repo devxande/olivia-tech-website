@@ -1,0 +1,14 @@
+{
+  "name": "olivia-tech-website",
+  "version": "1.0.0",
+  "description": "Site institucional da Olivia Tech — consultoria de infraestrutura de TI em Brasília.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "csso": "^5.0.5",
+    "terser": "^5.31.0"
+  }
+}

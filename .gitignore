@@ -10,6 +10,10 @@ desktop.ini
 *.swp
 *~
 
+# Dependências de build (Node)
+node_modules/
+package-lock.json
+
 # Logs e temporários
 *.log
 tmp/
