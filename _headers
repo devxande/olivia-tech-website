@@ -17,11 +17,15 @@
 /assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-# CSS e JS (nomes sem hash de versão): cache com revalidação em background.
+# CSS e JS: nomes SEM hash de versão (app.min.css, main.min.js), então o
+# conteúdo pode mudar a cada deploy. `no-cache` faz o navegador revalidar
+# sempre antes de usar — com o ETag do Pages, retorna 304 quando nada mudou
+# (barato) e serve a versão nova imediatamente após um deploy. Evita servir
+# JS/CSS velho para visitantes recorrentes.
 /css/*
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  Cache-Control: no-cache
 /js/*
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  Cache-Control: no-cache
 
 # Ilustrações vetoriais: podem ser reeditadas, então cache curto com revalidação.
 /assets/img/*
