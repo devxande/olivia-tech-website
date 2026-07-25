@@ -800,7 +800,12 @@
             <label class="field__label" for="message">Como podemos ajudar?</label>
             <textarea class="field__control" id="message" name="message" rows="4" placeholder="Descreva sua necessidade de infraestrutura"></textarea>
           </div>
-          <p class="form__note">Ao enviar, sua mensagem abre no WhatsApp já preenchida — é só confirmar o envio por lá. Nada é armazenado neste site: os dados vão direto para o WhatsApp.</p>
+          <!-- Honeypot anti-spam: invisível para humanos; se preenchido, o envio é ignorado no servidor. -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="website">Não preencha este campo</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <p class="form__note">Ao enviar, registramos seu contato para retornarmos e sua mensagem abre no WhatsApp já preenchida — é só confirmar o envio por lá. Usamos seus dados apenas para responder à sua solicitação.</p>
           <button class="btn btn--on-light btn--lg" type="submit">Enviar pelo WhatsApp</button>
         </form>
       </div>

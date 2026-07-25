@@ -1067,6 +1067,15 @@ textarea.field__control { resize: vertical; }
   margin: 0;
 }
 
+/* Honeypot anti-spam: fora da tela, sem tab, invisível a leitores de tela. */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .form__success {
   display: flex;
   flex-direction: column;

@@ -5,7 +5,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node build.mjs"
+    "build": "node build.mjs",
+    "db:create": "npx --yes wrangler d1 create olivia-tech-leads",
+    "db:schema": "npx --yes wrangler d1 execute olivia-tech-leads --remote --file=db/schema.sql",
+    "leads": "npx --yes wrangler d1 execute olivia-tech-leads --remote --command=\"SELECT id, created_at, name, company, email, phone FROM leads ORDER BY created_at DESC LIMIT 50\"",
+    "dev": "npx --yes wrangler pages dev . --d1=DB"
   },
   "devDependencies": {
     "csso": "^5.0.5",

@@ -542,13 +542,20 @@
 
       if (!validate(form)) return;
 
-      var url = openWhatsApp({
+      var data = {
         name: value(form, 'name'),
         company: value(form, 'company'),
         email: value(form, 'email'),
         phone: value(form, 'phone'),
-        message: value(form, 'message')
-      });
+        message: value(form, 'message'),
+        website: value(form, 'website') // honeypot
+      };
+
+      // Registra o lead no servidor (best-effort). Não bloqueia nem impede o
+      // WhatsApp: se falhar (offline, binding ausente), o fluxo segue normal.
+      saveLead(data);
+
+      var url = openWhatsApp(data);
       showSuccess(form, success, url);
     });
 
@@ -585,6 +592,19 @@
       if (firstError) firstError.focus();
     }
     return ok;
+  }
+
+  // Envia o lead para a Function /contact (mesmo domínio, dentro da CSP).
+  // Silencioso de propósito: o WhatsApp é o caminho garantido de contato.
+  function saveLead(data) {
+    try {
+      fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        keepalive: true
+      }).catch(function () {});
+    } catch (_) {}
   }
 
   function openWhatsApp(data) {
