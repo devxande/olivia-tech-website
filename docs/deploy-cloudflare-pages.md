@@ -7,21 +7,41 @@
 
 | Item | Valor |
 |---|---|
-| **Tipo do projeto** | Site estático puro (HTML, CSS, JavaScript) |
-| **Necessita build?** | **Não** — servir os arquivos diretamente |
+| **Tipo do projeto** | Site estático com etapa de build leve (minificação de CSS/JS) |
+| **Necessita build?** | **Sim** — `npm run build` gera os arquivos minificados |
 | **Framework preset** | `None` |
 | **Production branch** | `main` |
-| **Build command** | *(deixar em branco)* |
+| **Build command** | `npm run build` |
 | **Build output directory** | `/` (raiz do repositório) |
+| **Versão do Node** | `20` (fixada no `.nvmrc`) |
 | **Variáveis de ambiente** | Nenhuma |
-| **Arquivo de config no repo** | Não é necessário |
+| **Arquivo de config no repo** | `package.json` (deps de build) + `build.mjs` |
 
-> Este é um site estático sem etapa de build. **Não** use build command nem output directory customizado.
-> O `index.html` está na raiz, então o Cloudflare Pages serve tudo direto, sem processamento.
+> O `index.html` está na raiz e referencia `css/app.min.css` e `js/main.min.js`.
+> Esses dois arquivos são **gerados** pelo build a partir das fontes
+> (`css/tokens.css`, `css/styles.css`, `js/main.js`) e **não são versionados**
+> no Git — o Cloudflare os regenera a cada deploy.
 
-## Por que sem build?
+## Como funciona o build
 
-O projeto não usa Node, React, bundler ou pré-processador. Os arquivos já estão prontos para o navegador. Adicionar um build só traria complexidade sem benefício. Ícones são SVG inline e as fontes (Manrope/Inter) são servidas localmente via `@font-face` — **não há dependências de CDN externo** em tempo de execução.
+O projeto tem uma etapa de build mínima só para **minificar e combinar** CSS/JS
+(sem framework, bundler ou pré-processador). O passo é reprodutível:
+
+```bash
+npm install   # instala csso + terser (devDependencies)
+npm run build # gera css/app.min.css e js/main.min.js
+```
+
+O Cloudflare Pages faz isso sozinho no deploy: detecta o `package.json`, roda
+`npm install` e em seguida o **build command** (`npm run build`). Depois publica
+o conteúdo da raiz.
+
+> **`node_modules` não é publicado.** O Cloudflare Pages exclui `node_modules`
+> do upload automaticamente (é só dependência de build), então usar a raiz `/`
+> como output directory é seguro — nenhuma dependência vai para o site.
+
+Ícones são SVG inline e as fontes (Manrope/Inter) são servidas localmente via
+`@font-face` — **não há dependências de CDN externo** em tempo de execução.
 
 ## Cabeçalhos de segurança (`_headers`)
 
@@ -63,18 +83,23 @@ O repositório inclui um arquivo `_headers` na raiz. O Cloudflare Pages o aplica
 | **Project name** | `olivia-tech-website` |
 | **Production branch** | `main` |
 | **Framework preset** | `None` |
-| **Build command** | *(vazio)* |
+| **Build command** | `npm run build` |
 | **Build output directory** | `/` |
 | **Root directory** | *(vazio / raiz)* |
-| **Environment variables** | *(nenhuma)* |
+| **Environment variables** | *(nenhuma — versão do Node vem do `.nvmrc`)* |
 
 ### Passos
 
 1. Acesse [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** → **Create** → aba **Pages** → **Connect to Git**.
 2. Clique em **Connect GitHub** e autorize a Cloudflare. Em *Repository access*, libere o `olivia-tech-website` (ou "All repositories").
 3. Selecione **`devxande/olivia-tech-website`** → **Begin setup**.
-4. Na tela de configuração de build, preencha os valores da tabela acima. O ponto principal: preset `None`, **sem** build command, output `/`.
+4. Na tela de configuração de build, preencha os valores da tabela acima. O ponto principal: preset `None`, build command `npm run build`, output `/`.
 5. Clique em **Save and Deploy** (o primeiro build leva ~1 min).
+
+> **Projeto já existente?** Se o Pages já está conectado com a config antiga
+> (sem build), atualize em **Settings → Builds & deployments → Build
+> configurations**: defina **Build command** = `npm run build` e mantenha
+> **Output directory** = `/`. Depois faça um *Retry deployment* ou um novo push.
 6. Ao terminar, o site fica em uma URL `https://olivia-tech-website.pages.dev`. **Teste por ela primeiro** (home, CTAs, formulário abrindo o WhatsApp) antes de conectar o domínio.
 
 > A cada `git push` na branch `main`, o Cloudflare Pages republica o site automaticamente.
@@ -131,5 +156,7 @@ Depois do primeiro deploy (na URL `*.pages.dev` e, em seguida, no domínio próp
 
 Para qualquer site estático futuro, repita o mesmo padrão:
 - Repositório no GitHub com `index.html` na raiz.
-- Cloudflare Pages: preset `None`, branch `main`, sem build command, output `/`.
+- Cloudflare Pages: preset `None`, branch `main`, output `/`. Sem etapa de
+  build, deixe o build command vazio; com minificação (como aqui), use
+  `npm run build`.
 - Domínio via nameservers da Cloudflare.
