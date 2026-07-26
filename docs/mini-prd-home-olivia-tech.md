@@ -5,8 +5,8 @@
 
 - **Produto:** Site institucional Olivia Tech (home page)
 - **Direção visual:** 1a — Aurora Técnica
-- **Status:** Primeira versão implementada, com melhorias de robustez/segurança aplicadas
-- **Última atualização:** 21/07/2026
+- **Status:** Em produção (`oliviatech.com.br`), com captação de leads, rastreio de conversão e analytics implementados
+- **Última atualização:** 26/07/2026
 
 ---
 
@@ -14,7 +14,7 @@
 
 A Olivia Tech é uma consultoria de infraestrutura de TI, sediada em Brasília, focada em empresas que dependem de uma operação estável e não podem parar. A home page é o principal ponto de entrada digital da marca e tem como função apresentar os serviços, transmitir confiança técnica e converter visitantes em contatos comerciais reais.
 
-A página foi implementada como site estático (HTML, CSS e JavaScript puro, sem build), reaproveitando os tokens de design (cores, tipografia, espaçamentos e efeitos) da direção visual **Aurora Técnica**.
+A página foi implementada em HTML, CSS e JavaScript puro (sem framework), reaproveitando os tokens de design (cores, tipografia, espaçamentos e efeitos) da direção visual **Aurora Técnica**. Há uma etapa de build leve (minificação de CSS/JS com cache-busting) e um backend serverless mínimo em Cloudflare Pages Functions para captação de leads e rastreio de conversão — ver `README.md` na raiz e os docs específicos.
 
 ## 2. Objetivo da home page
 
@@ -74,7 +74,7 @@ Ordem das seções, de cima para baixo:
 
 - **Solicitar diagnóstico** — botão principal (navbar e hero). Rola suavemente até a seção de contato.
 - **Falar no WhatsApp** — abre `https://wa.me/5561981399376` em nova aba. Presente no hero e na seção de contato.
-- **Enviar pelo WhatsApp** — botão de submissão do formulário: valida os campos e abre o WhatsApp com a mensagem já preenchida.
+- **Enviar pelo WhatsApp** — botão de submissão do formulário: valida os campos, **registra o lead no banco** (`POST /contact` → D1) e abre o WhatsApp com a mensagem já preenchida.
 - **E-mail** — `contato@oliviatech.com.br` (confirmado e ativo) como canal alternativo.
 
 ## 8. Regras de copy e tom de voz
@@ -89,31 +89,40 @@ Ordem das seções, de cima para baixo:
 
 ## 9. Restrições e itens fora de escopo
 
-- Sem depoimentos, cases, números ou métricas fictícias.
+- Sem depoimentos, cases, números ou métricas fictícias (bloco de prova social **adiado** até haver casos reais).
 - Sem certificações, selos, parceiros ou prêmios não comprovados.
-- Sem backend real de formulário nesta versão.
 - Sem área logada, blog, e-commerce ou outras páginas além da home.
-- Sem integrações de analytics, CRM ou automação nesta versão.
+- Sem CRM ou automação de marketing.
+
+> Itens que **deixaram** de estar fora de escopo (implementados): backend de captação de leads (D1), rastreio de cliques nos CTAs e analytics sem cookies (Cloudflare Web Analytics).
 
 ## 10. Requisitos funcionais atuais
 
 - **RF01** — Navbar fixa no topo durante a rolagem.
 - **RF02** — CTAs "Solicitar diagnóstico" rolam suavemente até a seção de contato.
 - **RF03** — Links de WhatsApp abrem `https://wa.me/5561981399376` em nova aba.
-- **RF04** — Formulário de contato: valida os campos obrigatórios (Nome, Empresa, E-mail) e, ao enviar, monta a mensagem e abre o WhatsApp já preenchido (`https://wa.me/5561981399376`); exibe o estado de sucesso "Quase lá — conclua no WhatsApp." com botão de fallback caso o pop-up seja bloqueado. Não há envio/armazenamento de dados no servidor.
+- **RF04** — Formulário de contato: valida os campos obrigatórios (Nome, Empresa, E-mail), **registra o lead no D1** (`POST /contact`, best-effort) e abre o WhatsApp já preenchido (`https://wa.me/5561981399376`); exibe o estado de sucesso com botão de fallback caso o pop-up seja bloqueado. Se o backend falhar, o WhatsApp continua funcionando (a captação não bloqueia a conversão). Ver `docs/captacao-leads-d1.md`.
 - **RF05** — Layout responsivo, com ajustes para telas até 900px e até 560px.
 - **RF06** — Ano do rodapé atualizado automaticamente (via `main.js`).
 - **RF07** — Ícones em SVG inline (equivalentes Lucide, sem CDN); fontes Manrope e Inter servidas localmente via `@font-face` (subset latin, `font-display: swap`), sem Google Fonts.
+- **RF08** — Rastreio de cliques nos CTAs: cada botão marcado (`data-cta`/`data-cta-local`) envia um evento (`POST /event` via `sendBeacon`) gravado no D1, para medir qual CTA e posição convertem. Ver `docs/rastreio-ctas.md`.
+- **RF09** — Analytics de páginas sem cookies (Cloudflare Web Analytics, beacon injetado pelo Pages). Ver `docs/web-analytics.md`.
+- **RF10** — Clicar na logo da navbar volta ao topo da página.
+- **RF11** — Build de produção (`npm run build`): combina e minifica CSS/JS e injeta hash de versão (`?v=…`) nas referências do HTML para cache-busting confiável. Roda no deploy do Cloudflare.
 
 ## 11. Pendências técnicas atuais
 
-- **Formulário sem backend** — por design nesta versão: não há envio/armazenamento no servidor; a conversão acontece pelo WhatsApp. Definir um destino real (serviço de formulário/e-mail) é um passo futuro opcional.
+- **Notificação de lead novo** — hoje o lead cai no D1 mas só é visto rodando `npm run leads`. Um aviso imediato (e-mail via Cloudflare Email Routing ou mensagem no WhatsApp) é o próximo passo recomendado.
+- **Presença no Google** (Google Business Profile + Search Console) — ações fora do repositório, dependem de contas do usuário.
 
 Resolvidos (antes eram pendências):
 
-- ~~Dependências externas via CDN~~ — ícones agora são SVG inline e as fontes são servidas localmente; o site não depende mais de CDNs externos.
+- ~~Dependências externas via CDN~~ — ícones são SVG inline e fontes locais (única exceção externa: o beacon do Cloudflare Web Analytics).
 - ~~E-mail de contato a confirmar~~ — `contato@oliviatech.com.br` confirmado e ativo.
-- ~~Mensagem do WhatsApp sem texto~~ — o formulário e os CTAs abrem o WhatsApp com a mensagem já preenchida.
+- ~~Mensagem do WhatsApp sem texto~~ — formulário e CTAs abrem o WhatsApp com a mensagem preenchida.
+- ~~Formulário sem backend~~ — leads agora gravam no D1 (`/contact`); WhatsApp mantido como caminho garantido.
+- ~~Sem analytics / medição de conversão~~ — Web Analytics (páginas) + rastreio de cliques nos CTAs (`/event`).
+- ~~JS/CSS antigo servido a visitantes após deploy~~ — resolvido com cache-busting por hash de versão no build.
 
 ## 12. Critérios de aprovação da primeira versão
 
@@ -128,26 +137,37 @@ Resolvidos (antes eram pendências):
 
 ```
 E:\Olivia Tech\
-├── index.html                       # Estrutura e conteúdo da home page
-├── _headers                         # Cabeçalhos de segurança para Cloudflare Pages (CSP etc.)
-├── robots.txt                       # Diretrizes de rastreamento + link do sitemap
-├── sitemap.xml                      # Sitemap (URL única da home)
+├── index.html                       # Estrutura e conteúdo da home (refs de css/js com ?v=hash)
+├── 404.html                         # Página de erro
+├── _headers                         # Cabeçalhos de segurança (CSP) + Cache-Control por rota
+├── robots.txt / sitemap.xml         # SEO
+├── package.json / build.mjs         # Build de produção (csso + terser + cache-busting)
+├── .nvmrc                           # Versão do Node (20) usada no build do Cloudflare
 ├── css\
-│   ├── tokens.css                   # Tokens de design + @font-face das fontes locais
-│   └── styles.css                   # Estilos de componentes, layout, diagramas e responsividade
+│   ├── tokens.css                   # Tokens de design + @font-face (FONTE — versionada)
+│   ├── styles.css                   # Estilos de componentes/layout/responsividade (FONTE)
+│   └── app.min.css                  # GERADO no build (não versionado)
 ├── js\
-│   └── main.js                      # Rolagem até contato, formulário/WhatsApp, reveal, ano do rodapé
-├── assets\
-│   ├── favicon.svg
-│   ├── apple-touch-icon.png
-│   ├── og-image.jpg                 # Preview social otimizado (1200×630, ~59 KB)
-│   └── fonts\                       # Manrope e Inter (woff2 variável, subset latin; 1 arquivo por família)
+│   ├── main.js                      # FONTE: scroll, formulário, rastreio de CTAs, reveal, etc.
+│   └── main.min.js                  # GERADO no build (não versionado)
+├── functions\                       # Cloudflare Pages Functions (backend serverless)
+│   ├── contact.js                   # POST /contact — grava lead no D1
+│   └── event.js                     # POST /event  — grava clique de CTA no D1
+├── db\
+│   └── schema.sql                   # Tabelas do D1: leads e events
+├── assets\                          # favicon, apple-touch-icon, og-image, fonts\ (Manrope/Inter)
 └── docs\
-    ├── mini-prd-home-olivia-tech.md # Este documento
-    └── deploy-cloudflare-pages.md   # Guia de publicação
+    ├── mini-prd-home-olivia-tech.md # Este documento (spec funcional)
+    ├── deploy-cloudflare-pages.md   # Guia de publicação + build
+    ├── captacao-leads-d1.md         # Backend de leads (/contact + D1)
+    ├── rastreio-ctas.md             # Rastreio de conversão (/event + D1)
+    ├── web-analytics.md             # Cloudflare Web Analytics
+    └── assets-guia.md               # Guia de assets
 ```
 
-Dependências externas: **nenhuma** em tempo de execução. Ícones (SVG inline) e fontes (`@font-face` local) são servidos pelo próprio domínio.
+> **Fontes vs. gerados:** os `.min` e o `node_modules/` **não** são versionados no Git — o Cloudflare os regenera a cada deploy via `npm run build`. Edite sempre as fontes (`css/*.css`, `js/main.js`) e rode `npm run build` antes de commitar.
+
+Dependências externas em runtime: apenas o beacon do **Cloudflare Web Analytics**. Todo o resto (ícones SVG inline, fontes locais) é servido pelo próprio domínio.
 
 ## 14. Próximos passos recomendados
 
@@ -159,9 +179,17 @@ Concluídos nesta iteração:
 - ~~Otimizar a og-image~~ (708 KB → ~59 KB).
 - ~~Adicionar cabeçalhos de segurança (`_headers`) para Cloudflare Pages~~ (feito).
 
-Próximos (opcionais, fora do escopo desta iteração):
+Concluídos nas iterações seguintes (2026-07-25/26):
 
-1. Definir o destino do formulário e integrar um backend real (e-mail ou serviço de formulário), se desejado.
-2. (Opcional) Adicionar analytics sem cookies (ex.: Cloudflare Web Analytics) para medir conversões, com nota de privacidade no rodapé.
-3. (Quando houver clientes) Colher 1–2 depoimentos reais — sem inventar.
-4. Publicar/atualizar a versão aprovada em produção.
+- ~~Backend real de captação de leads~~ — Cloudflare Pages Function `/contact` gravando no D1.
+- ~~Analytics sem cookies para medir conversões~~ — Cloudflare Web Analytics.
+- ~~Medir qual CTA converte~~ — rastreio de cliques `/event` no D1.
+- ~~Build com minificação e cache-busting~~ — `npm run build`.
+- ~~Publicar em produção~~ — no ar em `oliviatech.com.br` (Cloudflare Pages, deploy a cada push na `main`).
+
+Próximos (opcionais):
+
+1. **Notificação de lead novo** — e-mail (Cloudflare Email Routing) ou WhatsApp quando um lead entra.
+2. **Presença no Google** — Google Business Profile (mapa/busca local) e Search Console (enviar o sitemap).
+3. (Quando houver clientes) Colher 1–2 depoimentos/mini-cases reais — sem inventar.
+4. Conteúdo para busca orgânica (1–2 páginas respondendo dúvidas reais do cliente).

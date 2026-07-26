@@ -146,7 +146,7 @@ Depois do primeiro deploy (na URL `*.pages.dev` e, em seguida, no domínio próp
 - [ ] Home carrega com CSS, JS, ícones (SVG inline) e fontes locais renderizados.
 - [ ] Nenhuma requisição a domínios externos além do beacon do Cloudflare Web Analytics (`static.cloudflareinsights.com` / `cloudflareinsights.com`). Sem `unpkg`, `googleapis`, `gstatic`.
 - [ ] CTAs "Solicitar diagnóstico" rolam até a seção de contato.
-- [ ] Formulário: submit vazio bloqueia; envio válido abre o WhatsApp preenchido.
+- [ ] Formulário: submit vazio bloqueia; envio válido grava o lead no D1 (`POST /contact`) e abre o WhatsApp preenchido. Ver `docs/captacao-leads-d1.md` (exige o binding `DB`).
 - [ ] Console do navegador sem erros (inclusive sem violações de CSP).
 - [ ] Cabeçalhos presentes: conferir em [securityheaders.com](https://securityheaders.com) ou pela aba Network (resposta do documento deve trazer `content-security-policy`, `x-frame-options`, etc.).
 - [ ] Preview social: colar a URL no WhatsApp/redes e confirmar que o card com a `og-image.jpg` aparece.
