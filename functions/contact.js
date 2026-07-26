@@ -84,33 +84,47 @@ export function onRequest({ request }) {
   return json({ ok: false, error: 'method_not_allowed' }, 405);
 }
 
-// Notifica um lead novo por e-mail via Cloudflare Email Routing (send_email
-// binding `SEND_EMAIL`). Tudo aqui é best-effort e nunca lança: a resposta ao
-// usuário e o WhatsApp já aconteceram; esta notificação é secundária.
+// Notifica um lead novo por e-mail via Resend (API transacional).
+// Pages Functions não expõe o send_email binding do Email Routing, então
+// enviamos por um POST HTTPS server-side (a CSP do site não afeta chamadas da
+// Function). Tudo aqui é best-effort e nunca lança: a resposta ao usuário e o
+// WhatsApp já aconteceram; esta notificação é secundária.
 //
-// Bindings/vars esperados (painel → Settings → Functions):
-//   send_email binding  →  Variable name: SEND_EMAIL, destination: NOTIFY_TO
-//   NOTIFY_TO   (var)   →  destino verificado no Email Routing (ex.: contato@oliviatech.com.br)
-//   NOTIFY_FROM (var)   →  remetente no domínio (ex.: no-reply@oliviatech.com.br)
+// Vars/secrets esperados (painel → Settings → Variables and Secrets):
+//   RESEND_API_KEY (Secret)    →  chave da API do Resend (obrigatória)
+//   NOTIFY_TO      (Plaintext) →  destino (padrão: contato@oliviatech.com.br,
+//                                 que o alias do Email Routing encaminha ao Gmail)
+//   NOTIFY_FROM    (Plaintext) →  remetente num domínio verificado no Resend
+//                                 (padrão: Olivia Tech <no-reply@oliviatech.com.br>)
 export async function notifyNewLead(env, lead) {
   try {
-    if (!env || !env.SEND_EMAIL) return; // binding ausente: nada a fazer
-    const to = (env.NOTIFY_TO || 'contato@oliviatech.com.br').trim();
-    const from = (env.NOTIFY_FROM || 'no-reply@oliviatech.com.br').trim();
-    const raw = buildLeadEmail({ from, to, lead });
-    const { EmailMessage } = await import('cloudflare:email');
-    await env.SEND_EMAIL.send(new EmailMessage(from, to, raw));
+    if (!env || !env.RESEND_API_KEY) return; // sem key: nada a fazer
+    const payload = buildLeadEmail({
+      to: (env.NOTIFY_TO || 'contato@oliviatech.com.br').trim(),
+      from: (env.NOTIFY_FROM || 'Olivia Tech <no-reply@oliviatech.com.br>').trim(),
+      lead,
+    });
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${env.RESEND_API_KEY}`,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    // Se o Resend responder erro, ignoramos: o lead já está salvo no D1.
   } catch (_) {
     // silêncio proposital — o lead já está salvo
   }
 }
 
-// Monta a mensagem MIME (texto puro, UTF-8) com os dados do lead. Função pura,
-// sem dependências, para poder ser testada isoladamente.
+// Monta o corpo JSON da requisição do Resend com os dados do lead. Função pura,
+// sem dependências, para poder ser testada isoladamente. O texto é UTF-8 puro
+// (sem MIME manual): o Resend cuida da codificação do assunto/corpo.
 export function buildLeadEmail({ from, to, lead }) {
   const v = (x) => (x && String(x).trim()) || '(não informado)';
   const subject = `Novo lead: ${lead.name} — ${lead.company}`;
-  const body = [
+  const text = [
     'Novo lead pelo formulário do site Olivia Tech:',
     '',
     `Nome:     ${v(lead.name)}`,
@@ -122,35 +136,12 @@ export function buildLeadEmail({ from, to, lead }) {
     v(lead.message),
     '',
     '— Responda diretamente a este e-mail para falar com o lead.',
-  ].join('\r\n');
+  ].join('\n');
 
-  const messageId = `<${crypto.randomUUID()}@oliviatech.com.br>`;
-  const replyTo = lead.email
-    ? `${encodeHeaderWord(lead.name || '')} <${lead.email}>`.trim()
-    : '';
-
-  const headers = [
-    `From: Olivia Tech <${from}>`,
-    `To: <${to}>`,
-    replyTo ? `Reply-To: ${replyTo}` : '',
-    `Message-ID: ${messageId}`,
-    `Date: ${new Date().toUTCString()}`,
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=utf-8',
-    'Content-Transfer-Encoding: 8bit',
-    `Subject: ${encodeHeaderWord(subject)}`,
-  ].filter(Boolean);
-
-  return headers.join('\r\n') + '\r\n\r\n' + body + '\r\n';
-}
-
-// Codifica um cabeçalho como encoded-word RFC 2047 (base64 UTF-8) só quando há
-// caractere fora do ASCII imprimível — evita mojibake em assunto/nome com acento.
-function encodeHeaderWord(str) {
-  const s = String(str || '');
-  if (/^[\x20-\x7E]*$/.test(s)) return s;
-  const b64 = btoa(String.fromCharCode(...new TextEncoder().encode(s)));
-  return `=?utf-8?B?${b64}?=`;
+  const payload = { from, to: [to], subject, text };
+  // Reply-To no e-mail do lead: responder o aviso fala direto com ele.
+  if (lead.email) payload.reply_to = String(lead.email).trim();
+  return payload;
 }
 
 function json(body, status = 200) {

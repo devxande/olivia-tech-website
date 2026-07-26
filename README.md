@@ -85,7 +85,7 @@ docs/  documentação (ver abaixo)
 - [mini-prd-home-olivia-tech.md](docs/mini-prd-home-olivia-tech.md) — especificação funcional da home (conteúdo, CTAs, requisitos).
 - [deploy-cloudflare-pages.md](docs/deploy-cloudflare-pages.md) — publicação no Cloudflare Pages, config de build e domínio.
 - [captacao-leads-d1.md](docs/captacao-leads-d1.md) — backend de leads (`/contact` + D1), setup do binding.
-- [notificacao-leads.md](docs/notificacao-leads.md) — aviso de lead novo por e-mail (Email Routing + `send_email`).
+- [notificacao-leads.md](docs/notificacao-leads.md) — aviso de lead novo por e-mail (Resend, via `fetch` server-side).
 - [rastreio-ctas.md](docs/rastreio-ctas.md) — rastreio de conversão nos CTAs (`/event` + D1).
 - [web-analytics.md](docs/web-analytics.md) — Cloudflare Web Analytics (páginas, sem cookies).
 - [assets-guia.md](docs/assets-guia.md) — guia de imagens/fontes.
