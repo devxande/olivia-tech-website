@@ -113,7 +113,7 @@ Ordem das seções, de cima para baixo:
 ## 11. Pendências técnicas atuais
 
 - **Notificação de lead novo** — hoje o lead cai no D1 mas só é visto rodando `npm run leads`. Um aviso imediato (e-mail via Cloudflare Email Routing ou mensagem no WhatsApp) é o próximo passo recomendado.
-- **Presença no Google** (Google Business Profile + Search Console) — ações fora do repositório, dependem de contas do usuário.
+- **Presença no Google** (Google Business Profile + Search Console) — SEO local no repo já preparado (JSON-LD, sitemap, canonical, robots); falta a parte em contas Google (verificar propriedade, enviar sitemap, criar/verificar o perfil). Passo a passo em [seo-google.md](seo-google.md).
 
 Resolvidos (antes eram pendências):
 
@@ -191,6 +191,6 @@ Concluídos nas iterações seguintes (2026-07-25/26):
 Próximos (opcionais):
 
 1. **Notificação de lead novo** — e-mail (Cloudflare Email Routing) ou WhatsApp quando um lead entra.
-2. **Presença no Google** — Google Business Profile (mapa/busca local) e Search Console (enviar o sitemap).
+2. **Presença no Google** — Google Business Profile (mapa/busca local) e Search Console (enviar o sitemap). Guia: [seo-google.md](seo-google.md).
 3. (Quando houver clientes) Colher 1–2 depoimentos/mini-cases reais — sem inventar.
 4. Conteúdo para busca orgânica (1–2 páginas respondendo dúvidas reais do cliente).

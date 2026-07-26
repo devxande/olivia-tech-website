@@ -44,15 +44,27 @@
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": "https://oliviatech.com.br/#business",
     "name": "Olivia Tech",
     "description": "Consultoria de infraestrutura de TI em Brasília: redes, Wi-Fi corporativo, firewall, servidores, backup, VPN, links e failover. Atendimento consultivo, com diagnóstico claro antes de qualquer proposta.",
     "url": "https://oliviatech.com.br/",
+    "image": "https://oliviatech.com.br/assets/og-image.jpg",
     "email": "contato@oliviatech.com.br",
     "telephone": "+5561981399376",
-    "areaServed": {
-      "@type": "AdministrativeArea",
-      "name": "Brasília, DF"
-    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Brasília"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Distrito Federal"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Entorno do Distrito Federal"
+      }
+    ],
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Brasília",
