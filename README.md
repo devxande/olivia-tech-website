@@ -26,7 +26,7 @@ CSP estrita no `_headers` (`default-src 'self'` + os dois domínios do Analytics
 
 | Rota | Método | Faz | Doc |
 |---|---|---|---|
-| `/contact` | POST | Valida e grava o **lead** do formulário no D1 (tabela `leads`) | [captacao-leads-d1.md](docs/captacao-leads-d1.md) |
+| `/contact` | POST | Valida e grava o **lead** no D1 (tabela `leads`) e envia **e-mail de aviso** | [captacao-leads-d1.md](docs/captacao-leads-d1.md) · [notificacao-leads.md](docs/notificacao-leads.md) |
 | `/event` | POST | Grava um **clique de CTA** no D1 (tabela `events`), via allowlist | [rastreio-ctas.md](docs/rastreio-ctas.md) |
 
 Ambos são best-effort no front: se o backend falhar, o site (e o WhatsApp)
@@ -48,6 +48,12 @@ Operação do banco (precisa de `wrangler` autenticado — `npx wrangler login`)
 npm run leads      # últimos leads recebidos
 npm run events     # cliques por CTA e posição (medição de conversão)
 npm run db:schema  # (re)aplica db/schema.sql em produção (idempotente)
+```
+
+Testes da lógica das Functions (runner nativo do Node, sem deps):
+
+```bash
+npm test           # node --test functions/
 ```
 
 > **`.min` e `node_modules/` não são versionados** — o Cloudflare os regenera no
@@ -79,6 +85,7 @@ docs/  documentação (ver abaixo)
 - [mini-prd-home-olivia-tech.md](docs/mini-prd-home-olivia-tech.md) — especificação funcional da home (conteúdo, CTAs, requisitos).
 - [deploy-cloudflare-pages.md](docs/deploy-cloudflare-pages.md) — publicação no Cloudflare Pages, config de build e domínio.
 - [captacao-leads-d1.md](docs/captacao-leads-d1.md) — backend de leads (`/contact` + D1), setup do binding.
+- [notificacao-leads.md](docs/notificacao-leads.md) — aviso de lead novo por e-mail (Email Routing + `send_email`).
 - [rastreio-ctas.md](docs/rastreio-ctas.md) — rastreio de conversão nos CTAs (`/event` + D1).
 - [web-analytics.md](docs/web-analytics.md) — Cloudflare Web Analytics (páginas, sem cookies).
 - [assets-guia.md](docs/assets-guia.md) — guia de imagens/fontes.

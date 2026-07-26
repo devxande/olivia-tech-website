@@ -101,7 +101,7 @@ Ordem das seções, de cima para baixo:
 - **RF01** — Navbar fixa no topo durante a rolagem.
 - **RF02** — CTAs "Solicitar diagnóstico" rolam suavemente até a seção de contato.
 - **RF03** — Links de WhatsApp abrem `https://wa.me/5561981399376` em nova aba.
-- **RF04** — Formulário de contato: valida os campos obrigatórios (Nome, Empresa, E-mail), **registra o lead no D1** (`POST /contact`, best-effort) e abre o WhatsApp já preenchido (`https://wa.me/5561981399376`); exibe o estado de sucesso com botão de fallback caso o pop-up seja bloqueado. Se o backend falhar, o WhatsApp continua funcionando (a captação não bloqueia a conversão). Ver `docs/captacao-leads-d1.md`.
+- **RF04** — Formulário de contato: valida os campos obrigatórios (Nome, Empresa, E-mail), **registra o lead no D1** (`POST /contact`, best-effort) e abre o WhatsApp já preenchido (`https://wa.me/5561981399376`); exibe o estado de sucesso com botão de fallback caso o pop-up seja bloqueado. Se o backend falhar, o WhatsApp continua funcionando (a captação não bloqueia a conversão). Ao gravar um lead, dispara um **e-mail de aviso** (best-effort, via `waitUntil`) para atendimento rápido. Ver `docs/captacao-leads-d1.md` e `docs/notificacao-leads.md`.
 - **RF05** — Layout responsivo, com ajustes para telas até 900px e até 560px.
 - **RF06** — Ano do rodapé atualizado automaticamente (via `main.js`).
 - **RF07** — Ícones em SVG inline (equivalentes Lucide, sem CDN); fontes Manrope e Inter servidas localmente via `@font-face` (subset latin, `font-display: swap`), sem Google Fonts.
@@ -160,6 +160,7 @@ E:\Olivia Tech\
     ├── mini-prd-home-olivia-tech.md # Este documento (spec funcional)
     ├── deploy-cloudflare-pages.md   # Guia de publicação + build
     ├── captacao-leads-d1.md         # Backend de leads (/contact + D1)
+    ├── notificacao-leads.md         # Aviso de lead novo por e-mail (Email Routing)
     ├── rastreio-ctas.md             # Rastreio de conversão (/event + D1)
     ├── web-analytics.md             # Cloudflare Web Analytics
     └── assets-guia.md               # Guia de assets
