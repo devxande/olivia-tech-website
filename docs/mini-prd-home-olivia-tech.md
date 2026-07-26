@@ -22,7 +22,7 @@ Captar clientes reais. A página deve levar o visitante a solicitar um diagnóst
 
 ## 3. Público-alvo
 
-Pequenas e médias empresas que precisam de apoio profissional em infraestrutura de TI, especialmente em:
+Empresas que precisam de apoio profissional em infraestrutura de TI, especialmente em:
 
 - Redes e Wi-Fi corporativo
 - Firewall e segurança de rede
