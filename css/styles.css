@@ -1786,7 +1786,24 @@ textarea.field__control { resize: vertical; }
   /* menos camadas em movimento em telas pequenas (bateria e legibilidade) */
   .hero__beam { display: none; }
   .hero__aurora--deep { display: none; }
-  .showcase { grid-template-columns: 1fr; gap: var(--space-5); }
+  /* Vitrine vira carrossel horizontal no mobile: ocupa menos altura de rolagem
+     e o próximo card "espia" na borda, sinalizando que dá pra arrastar. */
+  .showcase {
+    display: flex;
+    grid-template-columns: none;
+    gap: var(--space-4);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--container-pad);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: var(--space-3);
+  }
+  .showcase::-webkit-scrollbar { display: none; }
+  .showcase .media-card {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
   .media-card__body { padding: var(--space-5); }
   .step-card__thumb { margin: calc(var(--space-8) * -1) calc(var(--space-8) * -1) 0; }
   /* navbar compacta: a marca não quebra e o CTA não domina a barra */
