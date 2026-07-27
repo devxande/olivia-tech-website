@@ -120,6 +120,24 @@ a:hover { color: var(--purple-700); }
 
 .btn:active { transform: translateY(0); }
 
+/* Foco de teclado visível e consistente nos controles interativos.
+   :focus-visible aparece só na navegação por teclado, não no clique com mouse.
+   O anel ciano é legível tanto sobre os fundos escuros (navbar/hero/contato/
+   rodapé) quanto sobre os claros. Campos de formulário, FAQ e links do bloco de
+   contato têm foco próprio e não entram aqui. */
+.btn:focus-visible,
+.navbar__cta:focus-visible,
+.navbar__toggle:focus-visible,
+.navbar__links a:focus-visible,
+.navbar__links-cta:focus-visible,
+.footer__nav a:focus-visible,
+.footer__contact a:focus-visible,
+.services__cta-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
 /* ---------- Skip link (acessibilidade) ---------- */
 /* Fica fora da tela até receber foco por teclado, então aparece acima do navbar. */
 .skip-link {
@@ -225,6 +243,9 @@ main:focus { outline: none; }
   transform: translateY(-2px);
   box-shadow: 0 12px 24px -8px rgba(79, 216, 224, .7);
 }
+
+/* CTA dentro do menu mobile — só aparece no painel empilhado (≤900px). */
+.navbar__links-cta { display: none; }
 
 /* Botão do menu mobile — escondido no desktop, exibido no breakpoint ≤900px */
 .navbar__toggle {
@@ -466,6 +487,14 @@ main:focus { outline: none; }
   max-width: 620px;
 }
 .hero__actions { display: flex; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-2); }
+.hero__note {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-text-inverse-muted);
+  margin: var(--space-3) 0 0;
+  max-width: 560px;
+}
 .hero__badges { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-4); }
 
 /* Availability status pill */
@@ -725,6 +754,64 @@ main:focus { outline: none; }
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   margin: 0;
+}
+
+/* Entregável do diagnóstico: torna concreto o que o cliente recebe */
+.deliverable {
+  background: var(--color-bg-section-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.deliverable__head { display: flex; flex-direction: column; gap: 10px; max-width: 660px; }
+.deliverable__title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+.deliverable__desc {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+.deliverable__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+.deliverable__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+}
+.deliverable__list .lucide {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: var(--color-accent-strong);
+}
+.deliverable__note {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+  margin: 0;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
 }
 .howto__grid {
   position: relative;
@@ -1854,6 +1941,21 @@ textarea.field__control { resize: vertical; }
   .navbar__links a:last-child { border-bottom: none; }
   /* o sublinhado deslizante do desktop não se aplica ao menu empilhado */
   .navbar__links a::after { display: none; }
+  /* CTA no fim do menu: quem abre o menu já demonstrou intenção — dá a ação
+     junto da navegação. Especificidade dobrada p/ vencer `.navbar__links a`. */
+  .navbar__links a.navbar__links-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--space-3);
+    padding: 14px 20px;
+    min-height: 44px;
+    background: var(--color-accent);
+    color: var(--purple-950);
+    font-weight: 600;
+    border-bottom: none;
+    border-radius: var(--radius-md);
+  }
   /* empilhado, a textura passa a cobrir o topo da seção em vez da lateral */
   .contact__texture {
     -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 42%);
@@ -1897,10 +1999,28 @@ textarea.field__control { resize: vertical; }
   .step-card__thumb { margin: calc(var(--space-8) * -1) calc(var(--space-8) * -1) 0; }
   /* navbar compacta: a marca não quebra e o CTA não domina a barra */
   .brand__name { white-space: nowrap; font-size: var(--text-base); }
-  .navbar__cta { padding: 10px 14px; font-size: var(--text-xs); white-space: nowrap; }
+  /* alvo de toque ≥44px sem alargar demais a barra */
+  .navbar__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: var(--text-xs);
+    white-space: nowrap;
+  }
+  .deliverable { padding: var(--space-6); }
+  .deliverable__list { grid-template-columns: 1fr; }
   .section, .section--compact { padding-left: var(--container-pad); padding-right: var(--container-pad); }
   .tech-panel { padding: var(--space-5); }
   .about__figure .tech-panel { padding: var(--space-5); }
   /* mantém os rótulos legíveis: diagrama largo passa a rolar horizontalmente */
   .services__diagram .tech-diagram { min-width: 560px; }
+}
+
+/* Laptops de tela baixa (ex.: 1366×720): comprime o hero para o CTA primário
+   caber acima da dobra. Só no desktop — o mobile já tem seu próprio ritmo. */
+@media (min-width: 901px) and (max-height: 760px) {
+  .hero { padding: var(--space-16) 0 var(--space-12); }
+  .hero__title { font-size: clamp(var(--text-3xl), 5.4vw, var(--text-6xl)); }
 }

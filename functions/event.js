@@ -14,7 +14,7 @@
 const ALLOWED = {
   event: ['cta_click'],
   label: ['solicitar-diagnostico', 'whatsapp'],
-  location: ['navbar', 'hero', 'servicos', 'como-funciona', 'contato', 'footer'],
+  location: ['navbar', 'hero', 'servicos', 'como-funciona', 'contato', 'footer', 'menu-mobile'],
 };
 
 export async function onRequestPost({ request, env }) {

@@ -115,6 +115,7 @@
       { sel: '.band__item', stagger: 90 },
       { sel: '.howto__head' },
       { sel: '.step-card', stagger: 80 },
+      { sel: '.deliverable' },
       { sel: '.howto__cta' },
       { sel: '.availability-section__inner' },
       { sel: '.availability-card', stagger: 70 },
@@ -640,7 +641,7 @@
 
   function openWhatsApp(data) {
     var lines = [
-      'Olá! Gostaria de solicitar um diagnóstico de infraestrutura.',
+      'Olá! Gostaria de uma conversa inicial sobre a infraestrutura da minha empresa.',
       '',
       'Nome: ' + data.name,
       'Empresa: ' + data.company,
