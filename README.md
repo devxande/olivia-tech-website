@@ -89,6 +89,7 @@ docs/  documentação (ver abaixo)
 - [notificacao-leads.md](docs/notificacao-leads.md) — aviso de lead novo por e-mail (Resend, via `fetch` server-side).
 - [rastreio-ctas.md](docs/rastreio-ctas.md) — rastreio de conversão nos CTAs (`/event` + D1).
 - [web-analytics.md](docs/web-analytics.md) — Cloudflare Web Analytics (páginas, sem cookies).
+- [performance-lighthouse.md](docs/performance-lighthouse.md) — auditorias de performance/Lighthouse (baseline de notas, ganho real vs. ruído).
 - [privacidade-lgpd.md](docs/privacidade-lgpd.md) — aviso de privacidade/LGPD (`/privacidade.html`): o que cobre e o que depende de dados do titular (CNPJ, prazo de retenção).
 - [seo-google.md](docs/seo-google.md) — presença no Google: SEO local (feito no repo) + passo a passo do Search Console e do Business Profile.
 - [assets-guia.md](docs/assets-guia.md) — guia de imagens/fontes.

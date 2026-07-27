@@ -34,6 +34,7 @@
   --purple-500: #6B3FA0;
   --purple-100: #EDE7F5;
   --purple-50:  #F6F3FA;
+  --cyan-700: #17696F;
   --cyan-600: #2FA9B2;
   --cyan-500: #4FD8E0;
   --cyan-100: #DEFAFB;
@@ -63,6 +64,8 @@
   --color-accent: var(--cyan-500);
   --color-accent-strong: var(--cyan-600);
   --color-accent-tint: var(--cyan-100);
+  /* Teal legível como texto/link sobre fundo claro (AA ≥ 4.5:1; cyan-600 falha). */
+  --color-link-on-light: var(--cyan-700);
   --color-danger: #C0392B;
   --color-danger-tint: rgba(192, 57, 43, .12);
 

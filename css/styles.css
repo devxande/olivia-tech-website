@@ -1293,7 +1293,7 @@ textarea.field__control { resize: vertical; }
 .legal p { margin: 0 0 var(--space-4); }
 .legal ul { margin: 0 0 var(--space-4); padding-left: var(--space-6); }
 .legal li { margin-bottom: var(--space-2); }
-.legal a { color: var(--color-accent-strong); text-decoration: underline; }
+.legal a { color: var(--color-link-on-light); text-decoration: underline; }
 .legal a:hover { color: var(--purple-700); }
 .legal strong { font-weight: 600; }
 .legal__updated {
