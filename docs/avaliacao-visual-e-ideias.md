@@ -447,13 +447,31 @@ a alternância claro/escuro?"* — o relatório recomenda a segunda opção.
 | 7 | Checklist de autoavaliação de infraestrutura (5.1) | Site novo | M | Alto (diferencial) |
 | 8 | 1ª página de conteúdo SEO local + hero acima da dobra em laptops baixos (5.2, 1.2) | Captação/UX | M | Médio (composto no tempo) |
 
-**Perguntas abertas para o dono** (necessárias antes de executar os itens que
-dependem de dado real):
+---
 
-1. Qual é o formato real do entregável do diagnóstico (documento? prazo?
-   reunião de apresentação?) — para o item 3.
-2. Existe definição de preço (valor, faixa ou critério) e prazo do diagnóstico
-   que possa ser publicada? — para o item 6.
-3. Existem credenciais reais publicáveis (anos de experiência, formação,
-   certificações)? — para uma futura nota "quem atende você" na seção Sobre.
-4. Material do novo Design System (seção 6).
+## Adendo — decisões do dono (27/07/2026)
+
+Respostas recebidas após a entrega do relatório; valem como diretriz para as
+tarefas derivadas:
+
+1. **Entregável do diagnóstico (destrava o item 3 do roteiro, com 1 pendência):**
+   o bloco "O que você recebe no diagnóstico" pode ser escrito com: levantamento
+   técnico do cenário atual; identificação de riscos, gargalos e oportunidades;
+   explicação consultiva dos próximos passos. **Pendência única:** confirmar se
+   o *documento resumido com os achados* é entregue em **toda** contratação —
+   se sim, ele é a âncora do bloco; se for eventual, fica de fora. Não citar
+   formato, nº de páginas nem prazo até confirmação.
+2. **Preço e prazo (destrava o item 6 do roteiro):** sem preço fechado no site.
+   A FAQ pode dizer que o valor depende do **porte da empresa, da complexidade
+   do ambiente e do escopo analisado**. Prazo com redação aberta e responsável
+   (ex.: "combinado na conversa inicial, junto com o escopo, antes de qualquer
+   contratação") — sem prometer tempo exato.
+3. **Credenciais:** nada de bloco "quem atende você" por enquanto — sem dados
+   reais enviados, a seção Sobre atual já cumpre o papel institucional. Quando
+   houver credenciais comprováveis, vira tarefa de esforço baixo.
+4. **Design System (seção 6): não aplicar.** Nenhuma adoção — nem o bloco (a) —
+   sem nova decisão do dono. A seção 6 permanece como análise de referência.
+5. **Direção de copy confirmada:** tom profissional/claro/confiável, sem
+   exageros, concretude no lugar de prova social. *Ressalva registrada:* usar
+   "acompanhamento após a entrega, dentro do horário de atendimento" (como o
+   site já faz), e não "suporte contínuo", que pode ser lido como plantão 24h.
