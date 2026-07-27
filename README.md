@@ -28,6 +28,8 @@ CSP estrita no `_headers` (`default-src 'self'` + os dois domínios do Analytics
 |---|---|---|---|
 | `/contact` | POST | Valida e grava o **lead** no D1 (tabela `leads`) e envia **e-mail de aviso** | [captacao-leads-d1.md](docs/captacao-leads-d1.md) · [notificacao-leads.md](docs/notificacao-leads.md) |
 | `/event` | POST | Grava um **clique de CTA** no D1 (tabela `events`), via allowlist | [rastreio-ctas.md](docs/rastreio-ctas.md) |
+| `/health` | GET | **Health-check** leve (`200 {"ok":true}`) para monitor de uptime — não toca no D1 | [uptime-monitoring.md](docs/uptime-monitoring.md) |
+| `/health/db` | GET | Health-check que valida o **D1** (`SELECT 1`) — 1 leitura por chamada, uso manual | [uptime-monitoring.md](docs/uptime-monitoring.md) |
 
 Ambos são best-effort no front: se o backend falhar, o site (e o WhatsApp)
 continua funcionando normalmente.
@@ -73,7 +75,7 @@ package.json / build.mjs     build (csso + terser + cache-busting)
 .nvmrc                       Node 20 (usado no build do Cloudflare)
 css/  tokens.css, styles.css (fontes) · app.min.css (gerado)
 js/   main.js (fonte) · main.min.js (gerado)
-functions/  contact.js (/contact) · event.js (/event)
+functions/  contact.js (/contact) · event.js (/event) · health.js (/health) · health/db.js (/health/db)
 db/   schema.sql (tabelas leads e events)
 assets/  favicon, apple-touch-icon, og-image, fonts/ (Manrope, Inter)
 docs/  documentação (ver abaixo)
@@ -89,6 +91,7 @@ docs/  documentação (ver abaixo)
 - [notificacao-leads.md](docs/notificacao-leads.md) — aviso de lead novo por e-mail (Resend, via `fetch` server-side).
 - [rastreio-ctas.md](docs/rastreio-ctas.md) — rastreio de conversão nos CTAs (`/event` + D1).
 - [web-analytics.md](docs/web-analytics.md) — Cloudflare Web Analytics (páginas, sem cookies).
+- [uptime-monitoring.md](docs/uptime-monitoring.md) — monitoramento de uptime: endpoint `/health` + monitor externo gratuito (UptimeRobot) com alerta por e-mail.
 - [performance-lighthouse.md](docs/performance-lighthouse.md) — auditorias de performance/Lighthouse (baseline de notas, ganho real vs. ruído).
 - [privacidade-lgpd.md](docs/privacidade-lgpd.md) — aviso de privacidade/LGPD (`/privacidade.html`): o que cobre e o que depende de dados do titular (CNPJ, prazo de retenção).
 - [seo-google.md](docs/seo-google.md) — presença no Google: SEO local (feito no repo) + passo a passo do Search Console e do Business Profile.

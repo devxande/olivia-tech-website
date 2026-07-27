@@ -28,3 +28,12 @@
 # Ilustrações vetoriais: podem ser reeditadas, então cache curto com revalidação.
 /assets/img/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# Health-check (monitor de uptime): nunca cacheado. A Function já devolve
+# `no-store`, mas reforçamos aqui para garantir que nenhuma camada de cache
+# sirva um 200 velho enquanto o site está fora do ar. A CSP global (bloco /*)
+# não afeta estas rotas: o corpo é JSON, não um documento — o monitor ignora CSP.
+/health
+  Cache-Control: no-store
+/health/*
+  Cache-Control: no-store
