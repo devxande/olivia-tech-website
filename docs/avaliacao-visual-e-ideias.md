@@ -345,29 +345,92 @@ D1 + CSP estrita (sem script externo).
 
 ---
 
-## 6. Novo Design System (Claude Design) — **AGUARDANDO MATERIAL**
+## 6. Novo Design System (Claude Design) — análise comparativa
 
-O Design System "Olivia Tech Design System" foi criado na conta do dono no
-Claude Design, à qual este ambiente **não tem acesso**. Para a análise
-comparativa, é preciso receber o material por um destes caminhos (qualquer um
-serve):
+Analisado via MCP o projeto **"Olivia Tech Design System"** (tokens, readme,
+componentes e o UI kit da homepage). Resumo do que ele é: uma releitura da
+Aurora Técnica **100% dark-mode e neon** — base roxo-quase-preto `#0A0710`,
+ciano saturado `#00F0FF`, roxo vibrante `#7B2CBF`, display em **Space
+Grotesk**, profundidade por *glow* em vez de sombra, aurora com `blur(120px)`
+por seção. Componentes em React/JSX + tokens CSS.
 
-1. Exportar o arquivo (`.dc.html` ou similar) para a pasta do projeto;
-2. Colar screenshots das telas no chat;
-3. Colar os tokens (cores, tipografia, espaçamentos, componentes) no chat.
+### 6.1 Comparação token a token com a Aurora Técnica atual
 
-Quando o material chegar, esta seção será preenchida com:
+| Dimensão | Site atual (`tokens.css`) | Novo DS | Compatibilidade |
+|---|---|---|---|
+| Fundo da página | Claro (branco/`#F6F3FA`), com hero e contato escuros (`#1E1230`) | Escuro total (`#0A0710`/`#130F1F`) | ⚠️ **É a divergência central** — muda a identidade da página |
+| Ciano | `#4FD8E0` (e `#17696F` p/ texto em claro) | `#00F0FF` (neon) | Parcial: ótimo sobre escuro; como texto em fundo claro reprova em contraste |
+| Roxo | `#1E1230`–`#6B3FA0` (marca sóbria) | `#7B2CBF`/`#9D4EDD` (vibrante, glow) | Parcial: funciona como acento nos trechos escuros |
+| Display | Manrope 700–800, H1 82 px | Space Grotesk 700, H1 48 px | Trocável (fonte é personalidade); escala do DS é mais contida |
+| Corpo | Inter (local) | Inter (**via Google Fonts CDN**) | ✅ mesma fonte; ❌ CDN viola a CSP — teria de ser self-host |
+| Espaçamento | Escala 4px (4→160) | Grid 8px (8→128) | ✅ subconjunto compatível |
+| Radii | 6/10/16/24/pill | 8–12/16/24/pill | ✅ praticamente iguais |
+| Elevação | Sombras nos trechos claros + glow nos escuros | Só glow + borda branca translúcida | ✅ nos trechos escuros; ❌ não cobre os claros |
+| Semânticas | Só `--color-danger` | success/warning/danger/info | ✅ adoção limpa |
+| Motion | Reveal + stagger + lift, reduced-motion | Idêntico em espírito (fade/slide, stagger 100ms, lift −4px) | ✅ já equivalente |
 
-- Comparação token a token com a **Aurora Técnica** (`css/tokens.css`);
-- Classificação do que pode ser adotado em **(a) adoções seguras/baixo esforço**
-  (cores, tipografia, espaçamentos, componentes isolados), **(b) mudanças
-  médias** (seções redesenhadas, novos padrões de layout) e **(c) redesenho
-  maior**;
-- Para cada item: viabilidade na stack estática + CSP, impacto visual e risco
-  de regressão;
-- Veredito explícito: **evolução da Aurora Técnica vs. troca de identidade** —
-  com a decisão de trocar identidade sempre voltando ao dono antes de qualquer
-  suposição.
+### 6.2 Incompatibilidades duras (não adotar como está)
+
+1. **StatsStrip com métricas "500+, 98%, 12+" e TestimonialsStrip com 4
+   depoimentos de clientes** — violam a diretriz inviolável do projeto (nunca
+   inventar números/depoimentos). São placeholders do DS; **ficam de fora** até
+   haver dados reais. O componente pode ser guardado como *design pronto* para
+   quando existirem.
+2. **Fontes via Google Fonts CDN** (Space Grotesk, JetBrains Mono) — quebra a
+   CSP estrita e a política de fontes locais. Se a tipografia for adotada, é
+   por woff2 self-hosted (mesmo padrão do Manrope atual, ~30–70 KB).
+3. **Componentes em React/JSX** — o site é HTML/CSS/JS puro; nada é
+   aproveitável como código. O valor do DS aqui é **especificação visual**
+   (tokens + screenshots dos cards), não implementação.
+4. **Logo tipográfico do DS** — o DS não recebeu o logo real e inventou um
+   wordmark; o site já tem a marca do arco duplo. Manter a atual.
+
+### 6.3 O que pode ser inserido no site atual
+
+**(a) Adoções seguras, baixo esforço — evolução da Aurora Técnica, sem trocar identidade**
+
+| Item | Viabilidade | Impacto | Risco |
+|---|---|---|---|
+| Tokens semânticos success/warning/info (além do danger atual) | ✅ trivial | Baixo agora, útil p/ checklist (5.1) e estados de form | Nenhum |
+| Anel de foco 2px ciano do DS como padrão global de `:focus-visible` | ✅ trivial | Resolve o item 1.1 com a linguagem do DS | Nenhum |
+| Borda branca translúcida (8–14%) + glow no hover dos cards **das seções escuras** (hero, contato) | ✅ CSS puro | Médio — aproxima o "depth by light" do DS | Baixo |
+| `#9D4EDD` (roxo claro) como acento intermediário em fundos escuros | ✅ | Baixo | Baixo |
+| Regra editorial do DS: 1 trecho acentuado por headline, headlines em duas orações ("Um processo claro. Resultados concretos.") | ✅ copy | Médio | Nenhum |
+
+**(b) Mudanças médias — decisão de gosto, reversíveis**
+
+| Item | Viabilidade | Impacto | Risco |
+|---|---|---|---|
+| Space Grotesk self-hosted como display (no lugar do Manrope) | ✅ (woff2 local, subset latin) | Alto — muda a "voz tipográfica" para algo mais técnico/geométrico | Médio: re-testar quebras de linha do H1, LCP e preload |
+| Ciano `#00F0FF` **apenas nas superfícies escuras** (botão primário do hero, pulses, glows), mantendo `#17696F` p/ links em claro | ✅ | Médio-alto — o neon é o traço mais reconhecível do DS | Médio: saturação pode "gritar"; validar contraste do texto sobre o botão (`#0A0710` sobre `#00F0FF` passa AA) |
+| ProcessBand (faixa roxa com passos numerados + conector pontilhado) como redesenho do "Como funciona" | ✅ HTML/CSS | Médio | Médio: reescrever uma seção inteira |
+
+**(c) Redesenho maior — só com decisão explícita**
+
+| Item | Viabilidade | Impacto | Risco |
+|---|---|---|---|
+| **Dark-mode total** (`#0A0710` como base da página inteira, como no UI kit do DS) | ✅ tecnicamente (tokens semânticos já isolam as cores) | Alto — o site passa a ser "o DS" | **Alto**: todas as seções claras, as 9+ ilustrações SVG desenhadas para fundo claro, o contraste já auditado (A11y 100), a página de privacidade e o 404 precisariam ser refeitos/re-auditados |
+
+### 6.4 Veredito: evolução ou troca de identidade?
+
+O novo DS **não é um sistema paralelo — é a Aurora Técnica levada ao extremo
+dark/neon**. A diferença de identidade real está em duas decisões:
+
+1. **Página clara com momentos escuros (hoje) vs. página inteiramente escura
+   (DS).** Isso é troca de identidade. O site atual usa o claro para
+   legibilidade das seções de conteúdo (serviços, como funciona, FAQ) e o
+   escuro para impacto (hero, contato) — um padrão que favorece leitura B2B.
+   O DS aposta tudo no impacto.
+2. **Manrope vs. Space Grotesk** — troca de voz tipográfica, menor, mas
+   perceptível.
+
+**Recomendação:** adotar já o bloco (a) — é ganho sem risco e aproxima o site
+do DS. Tratar (b) como experimentos individuais (um por vez, medindo). **Não
+iniciar (c) sem decisão explícita do dono**, porque o custo real não é o CSS —
+é refazer ilustrações e re-auditar acessibilidade. Pergunta objetiva ao dono:
+*"você quer que o site inteiro fique escuro como no Design System, ou que o
+site atual absorva o acabamento do DS (neon, glow, foco, tipografia) mantendo
+a alternância claro/escuro?"* — o relatório recomenda a segunda opção.
 
 ---
 
