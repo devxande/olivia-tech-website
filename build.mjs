@@ -31,7 +31,7 @@ const jsV = hash(js);
 console.log('js/main.min.js gerado (v=' + jsV + ')');
 
 // Injeta/atualiza o ?v=<hash> nas referências do HTML (idempotente).
-for (const file of ['index.html', '404.html', 'privacidade.html']) {
+for (const file of ['index.html', '404.html', 'privacidade.html', 'checklist.html']) {
   let html;
   try {
     html = readFileSync(file, 'utf8');

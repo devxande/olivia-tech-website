@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autoavaliação de Infraestrutura de TI — Olivia Tech</title>
+  <meta name="description" content="12 perguntas rápidas de sim ou não para você medir, em 2 minutos, onde a infraestrutura de TI da sua empresa está mais exposta. Resultado na hora, sem cadastro.">
+  <link rel="canonical" href="https://oliviatech.com.br/checklist.html">
+  <meta name="theme-color" content="#1E1230">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Olivia Tech">
+  <meta property="og:title" content="Autoavaliação de Infraestrutura de TI — Olivia Tech">
+  <meta property="og:description" content="12 perguntas rápidas para medir onde a infraestrutura de TI da sua empresa está mais exposta. Resultado na hora, sem cadastro.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://oliviatech.com.br/checklist.html">
+  <meta property="og:image" content="https://oliviatech.com.br/assets/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Olivia Tech — Infraestrutura de TI para empresas que não podem parar.">
+
+  <link rel="preload" href="assets/fonts/Manrope.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="css/app.min.css?v=b4041838d0">
+</head>
+<body>
+
+  <span id="topo" aria-hidden="true"></span>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- Navbar (mesma da home; links apontam de volta para as seções da home) -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a class="brand" href="/" aria-label="Olivia Tech — voltar ao início">
+        <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M 45.79 43.57 A 18 18 0 1 1 45.79 20.43" fill="none" stroke="#F6F3FA" stroke-width="6.4" stroke-linecap="round"/>
+          <path d="M 45.79 20.43 A 18 18 0 0 1 45.79 43.57" fill="none" stroke="#4FD8E0" stroke-width="6.4" stroke-linecap="round"/>
+        </svg>
+        <span class="brand__name">Olivia Tech</span>
+      </a>
+      <nav class="navbar__links" id="primary-nav" aria-label="Navegação principal">
+        <a href="/#servicos">Serviços</a>
+        <a href="/#sobre">Sobre</a>
+        <a href="/#como-funciona">Como funciona</a>
+        <a href="/#contato">Contato</a>
+      </nav>
+      <a class="navbar__cta" data-cta="solicitar-diagnostico" data-cta-local="navbar" href="/#contato">Solicitar diagnóstico</a>
+      <button class="navbar__toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav">
+        <span class="navbar__toggle-box" aria-hidden="true">
+          <span class="navbar__toggle-bar"></span>
+          <span class="navbar__toggle-bar"></span>
+          <span class="navbar__toggle-bar"></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+
+    <section class="legal-hero">
+      <div class="legal-hero__inner">
+        <p class="legal-hero__eyebrow">Autoavaliação</p>
+        <h1 class="legal-hero__title">Como está a infraestrutura da sua empresa?</h1>
+        <p class="legal-hero__meta">12 perguntas de sim ou não, cerca de 2 minutos. O resultado aparece aqui na tela — sem cadastro e sem compromisso.</p>
+      </div>
+    </section>
+
+    <section class="checklist">
+      <div class="checklist__inner">
+
+        <p class="checklist__intro">
+          Responda pensando na operação de hoje. Cada <strong>"não"</strong> é um
+          ponto de atenção — não um veredito. A ideia é te ajudar a enxergar onde a
+          sua operação está mais exposta e dar nome ao que precisa de cuidado.
+        </p>
+
+        <form id="checklist-form" class="checklist__form" novalidate>
+          <ol class="checklist__questions">
+
+            <li class="q" data-name="q1" data-topic="Segundo link de internet (failover)">
+              <p class="q__text" id="q1-label">Se a sua internet cair agora, existe um segundo link que assume o tráfego automaticamente?</p>
+              <div class="q__answers" role="radiogroup" aria-labelledby="q1-label">
+                <label class="q__opt"><input type="radio" name="q1" value="sim"><span>Sim</span></label>
+                <label class="q__opt"><input type="radio" name="q1" value="nao"><span>Não</span></label>
+              </div>
+            </li>
+
+            <li class="q" data-name="q2" data-topic="Firewall dedicado">
+              <p class="q__text" id="q2-label">A sua rede tem um firewall dedicado configurado — não apenas o roteador que veio da operadora?</p>
+              <div class="q__answers" role="radiogroup" aria-labelledby="q2-label">
+                <label class="q__opt"><input type="radio" name="q2" value="sim"><span>Sim</span></label>
+                <label class="q__opt"><input type="radio" name="q2" value="nao"><span>Não</span></label>
+              </div>
+            </li>
+
+            <li class="q" data-name="q3" data-topic="Revogação de acessos ao desligar">
+              <p class="q__text" id="q3-label">Quando alguém sai da empresa, os acessos dessa pessoa são revogados no mesmo dia?</p>
+              <div class="q__answers" role="radiogroup" aria-labelledby="q3-label">
+                <label class="q__opt"><input type="radio" name="q3" value="sim"><span>Sim</span></label>
+                <label class="q__opt"><input type="radio" name="q3" value="nao"><span>Não</span></label>
+              </div>
+            </li>
+
+            <li class="q" data-name="q4" data-topic="Documentação da infraestrutura">
+              <p class="q__text" id="q4-label">Existe um registro atualizado de como a sua rede e os seus servidores estão montados?</p>
+              <div class="q__answers" role="radiogroup" aria-labelledby="q4-label">
+                <label class="q__opt"><input type="radio" name="q4" value="sim"><span>Sim</span></label>
+                <label class="q__opt"><input type="radio" name="q4" value="nao"><span>Não</span></label>
+              </div>
+            </li>
+
+            <li class="q" data-name="q5" data-topic="Atualizações de segurança">
+              <p class="q__text" id="q5-label">Os seus servidores e equipamentos críticos recebem atualizações de segurança com regularidade?</p>
+              <div class="q__answers" role="radiogroup" aria-labelledby="q5-label">
+                <label class="q__opt"><input type="radio" name="q5" value="sim"><span>Sim</span></label>
+                <label class="q__opt"><input type="radio" name="q5" value="nao"><span>Não</span></label>
+              </div>
+            </li>
+
+            <li class="q" data-name="q6" data-topic="Proteção de energia (nobreak)">
+              <p class="q__text" id="q6-label">Os seus equipamentos críticos têm proteção contra queda de energia (nobreak)?</p>
+              <div class="q__answers" role="radiogroup" aria-labelledby="q6-label">
+                <label class="q__opt"><input type="radio" name="q6" value="sim"><span>Sim</span></label>
+                <label class="q__opt"><input type="radio" name="q6" value="nao"><span>Não</span></label>
+              </div>
+            </li>
+
+            <li class="q" data-name="q7" data-topic="Rede de visitantes separada">
+              <p class="q__text" id="q7-label">A rede Wi-Fi de visitantes é separada da rede interna da empresa?</p>
+              <div class="q__answers" role="radiogroup" aria-labelledby="q7-label">
+                <label class="q__opt"><input type="radio" name="q7" value="sim"><span>Sim</span></label>
+                <label class="q__opt"><input type="radio" name="q7" value="nao"><span>Não</span></label>
+              </div>
+            </li>
+
+            <li class="q" data-name="q8" data-topic="Cobertura de Wi-Fi">
+              <p class="q__text" id="q8-label">O Wi-Fi cobre bem todos os ambientes onde a equipe trabalha, sem pontos cegos ou quedas?</p>
+              <div class="q__answers" role="radiogroup" aria-labelledby="q8-label">
+                <label class="q__opt"><input type="radio" name="q8" value="sim"><span>Sim</span></label>
+                <label class="q__opt"><input type="radio" name="q8" value="nao"><span>Não</span></label>
+              </div>
+            </li>
+
+            <li class="q" data-name="q9" data-topic="Monitoramento e alertas">
+              <p class="q__text" id="q9-label">Você é avisado automaticamente quando algo crítico para de funcionar, antes de o cliente reclamar?</p>
+              <div class="q__answers" role="radiogroup" aria-labelledby="q9-label">
+                <label class="q__opt"><input type="radio" name="q9" value="sim"><span>Sim</span></label>
+                <label class="q__opt"><input type="radio" name="q9" value="nao"><span>Não</span></label>
+              </div>
+            </li>
+
+            <li class="q" data-name="q10" data-topic="Proteção contra ransomware">
+              <p class="q__text" id="q10-label">Os computadores da equipe têm proteção contra vírus e ransomware gerenciada de forma centralizada?</p>
+              <div class="q__answers" role="radiogroup" aria-labelledby="q10-label">
+                <label class="q__opt"><input type="radio" name="q10" value="sim"><span>Sim</span></label>
+                <label class="q__opt"><input type="radio" name="q10" value="nao"><span>Não</span></label>
+              </div>
+            </li>
+
+            <li class="q" data-name="q11" data-topic="Acesso remoto seguro (VPN)">
+              <p class="q__text" id="q11-label">Quem acessa a empresa de fora usa uma conexão segura (VPN), em vez de um acesso exposto na internet?</p>
+              <div class="q__answers" role="radiogroup" aria-labelledby="q11-label">
+                <label class="q__opt"><input type="radio" name="q11" value="sim"><span>Sim</span></label>
+                <label class="q__opt"><input type="radio" name="q11" value="nao"><span>Não</span></label>
+              </div>
+            </li>
+
+            <li class="q" data-name="q12" data-topic="Responsável pela TI">
+              <p class="q__text" id="q12-label">Existe alguém claramente responsável pela TI quando algo dá errado?</p>
+              <div class="q__answers" role="radiogroup" aria-labelledby="q12-label">
+                <label class="q__opt"><input type="radio" name="q12" value="sim"><span>Sim</span></label>
+                <label class="q__opt"><input type="radio" name="q12" value="nao"><span>Não</span></label>
+              </div>
+            </li>
+
+          </ol>
+
+          <div class="checklist__actions">
+            <button class="btn btn--on-light btn--lg" type="submit">Ver meu resultado</button>
+            <p class="checklist__hint" id="checklist-hint" hidden>Responda todas as perguntas para ver o resultado. As que faltam estão destacadas.</p>
+            <p class="checklist__privacy">Nada é enviado automaticamente e não pedimos nenhum dado. O resultado aparece aqui na tela.</p>
+          </div>
+
+          <noscript>
+            <p class="checklist__privacy">
+              Este checklist precisa de JavaScript para calcular o resultado.
+              Se preferir, é só falar com a gente pelo
+              <a href="https://wa.me/5561981399376" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+              ou pelo <a href="/#contato">formulário de contato</a>.
+            </p>
+          </noscript>
+        </form>
+
+        <div id="checklist-result" class="checklist__result is-hidden" tabindex="-1" aria-live="polite">
+          <p class="checklist__result-eyebrow">Seu resultado</p>
+          <p class="checklist__score"><span id="checklist-score-num">0</span> <span class="checklist__score-unit">pontos de atenção</span></p>
+          <h2 class="checklist__band" id="checklist-band">—</h2>
+          <p class="checklist__band-desc" id="checklist-band-desc"></p>
+
+          <div class="checklist__points" id="checklist-points" hidden>
+            <p class="checklist__points-title">Onde você marcou "não":</p>
+            <ul id="checklist-points-list"></ul>
+          </div>
+
+          <p class="checklist__disclaimer">
+            Esta é uma autoavaliação rápida para orientar a conversa — não substitui
+            um diagnóstico técnico da sua operação.
+          </p>
+
+          <div class="checklist__cta">
+            <a class="btn btn--on-light btn--lg" id="checklist-wa"
+               href="https://wa.me/5561981399376"
+               target="_blank" rel="noopener noreferrer"
+               data-cta="whatsapp" data-cta-local="checklist">Conversar sobre o meu resultado</a>
+            <a class="btn btn--ghost btn--lg" href="/#contato"
+               data-cta="solicitar-diagnostico" data-cta-local="checklist">Prefiro pelo formulário</a>
+          </div>
+
+          <button type="button" class="checklist__restart" id="checklist-restart">Refazer a autoavaliação</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <div class="brand">
+          <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M 45.79 43.57 A 18 18 0 1 1 45.79 20.43" fill="none" stroke="#F6F3FA" stroke-width="6.4" stroke-linecap="round"/>
+            <path d="M 45.79 20.43 A 18 18 0 0 1 45.79 43.57" fill="none" stroke="#4FD8E0" stroke-width="6.4" stroke-linecap="round"/>
+          </svg>
+          <span class="brand__name">Olivia Tech</span>
+        </div>
+        <p class="footer__tagline">Consultoria de infraestrutura de TI para empresas em Brasília, DF.</p>
+      </div>
+      <nav class="footer__nav" aria-label="Navegação do rodapé">
+        <span class="footer__col-title">Navegação</span>
+        <a href="/#servicos">Serviços</a>
+        <a href="/#sobre">Sobre</a>
+        <a href="/#como-funciona">Como funciona</a>
+        <a href="/#faq">Perguntas frequentes</a>
+        <a href="checklist.html">Autoavaliação</a>
+        <a href="/#contato">Contato</a>
+        <a href="privacidade.html">Privacidade</a>
+      </nav>
+      <div class="footer__contact">
+        <span class="footer__col-title">Contato</span>
+        <a href="mailto:contato@oliviatech.com.br">contato@oliviatech.com.br</a>
+        <a data-wa data-cta="whatsapp" data-cta-local="footer" href="https://wa.me/5561981399376" target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
+        <span>Seg–Sex, a partir das 19h</span>
+        <span>Fins de semana, sob consulta</span>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      © <span id="footer-year">2026</span> Olivia Tech. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <!-- Botão flutuante de WhatsApp: presente em todas as páginas. Href já traz a
+       mensagem pré-preenchida (por isso sem data-wa, que reescreveria o href sem
+       o texto). data-cta mantém o rastreio de cliques. -->
+  <a class="wa-fab"
+     href="https://wa.me/5561981399376?text=Ol%C3%A1%2C%20Olivia%20Tech!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20Diagn%C3%B3stico%20de%20Infraestrutura%20de%20TI."
+     target="_blank" rel="noopener noreferrer"
+     aria-label="Falar com a Olivia Tech no WhatsApp"
+     data-cta="whatsapp" data-cta-local="fab">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script defer src="js/main.min.js?v=89593c2889"></script>
+</body>
+</html>

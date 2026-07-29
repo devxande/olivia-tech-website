@@ -10,11 +10,22 @@
 //
 // Não guardamos IP, user-agent nem referer aqui — a medição é agregada e anônima
 // (diferente de /contact, onde o lead é um contato identificado de propósito).
+//
+// Dois tipos de evento entram aqui:
+//  - cta_click: clique num botão marcado (label = qual botão, location = onde).
+//  - checklist_result: resultado agregado da autoavaliação (/checklist). O label
+//    é só a pontuação final ('score-0' … 'score-12'), sem as respostas
+//    individuais — a medição continua anônima; os temas que a pessoa marcou só
+//    vão para a conversa que ela mesma inicia no WhatsApp.
 
 const ALLOWED = {
-  event: ['cta_click'],
-  label: ['solicitar-diagnostico', 'whatsapp'],
-  location: ['navbar', 'hero', 'servicos', 'como-funciona', 'contato', 'footer', 'menu-mobile'],
+  event: ['cta_click', 'checklist_result'],
+  label: [
+    'solicitar-diagnostico', 'whatsapp',
+    'score-0', 'score-1', 'score-2', 'score-3', 'score-4', 'score-5', 'score-6',
+    'score-7', 'score-8', 'score-9', 'score-10', 'score-11', 'score-12',
+  ],
+  location: ['navbar', 'hero', 'servicos', 'como-funciona', 'contato', 'footer', 'menu-mobile', 'checklist'],
 };
 
 export async function onRequestPost({ request, env }) {

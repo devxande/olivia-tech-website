@@ -20,6 +20,7 @@
     });
 
     setupContactForm();
+    setupChecklist();
     setupScrollProgress();
     setupReveal();
     setupHeroParallax();
@@ -47,9 +48,11 @@
 
   // Envio best-effort: sendBeacon sobrevive à saída da página (o CTA do
   // WhatsApp abre outra aba/app), e nunca bloqueia nem quebra a navegação.
-  function sendEvent(label, location) {
+  // `event` é opcional: por padrão 'cta_click' (clique de botão), mas o
+  // checklist reaproveita esta função com 'checklist_result'.
+  function sendEvent(label, location, event) {
     if (!label || !location) return;
-    var body = JSON.stringify({ event: 'cta_click', label: label, location: location });
+    var body = JSON.stringify({ event: event || 'cta_click', label: label, location: location });
     try {
       if (navigator.sendBeacon) {
         var blob = new Blob([body], { type: 'application/json' });
@@ -662,6 +665,144 @@
 
     form.classList.add('is-hidden');
     success.classList.remove('is-hidden');
+  }
+
+  // --- Checklist de autoavaliação (/checklist) ----------------------------
+
+  // Faixas honestas: cada "não" é um ponto de atenção. Os textos não prometem
+  // nada nem alarmam — descrevem o estado e convidam para a conversa inicial.
+  function checklistBand(score) {
+    if (score === 0) return {
+      title: 'Base bem cuidada',
+      desc: 'Você não marcou nenhum ponto de atenção nesta autoavaliação. Vale uma conversa para manter assim e revisar o que não coube nestas perguntas.'
+    };
+    if (score <= 3) return {
+      title: 'Poucos pontos de atenção',
+      desc: 'Sua base está razoável, mas há ajustes que trazem mais tranquilidade. Dá para resolver com prioridade e sem pressa.'
+    };
+    if (score <= 6) return {
+      title: 'Vários pontos de atenção',
+      desc: 'Há um conjunto de riscos que merece um olhar próximo antes que apareça em uma hora ruim.'
+    };
+    return {
+      title: 'Muitos pontos de atenção',
+      desc: 'A operação está exposta em várias frentes. Uma conversa inicial ajuda a priorizar o que resolver primeiro.'
+    };
+  }
+
+  function setupChecklist() {
+    var form = document.getElementById('checklist-form');
+    var result = document.getElementById('checklist-result');
+    if (!form || !result) return;
+
+    var questions = form.querySelectorAll('.q');
+    var hint = document.getElementById('checklist-hint');
+    var restart = document.getElementById('checklist-restart');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var missing = 0;
+      var attention = [];
+      questions.forEach(function (q) {
+        var name = q.getAttribute('data-name');
+        var checked = form.querySelector('input[name="' + name + '"]:checked');
+        if (!checked) {
+          q.classList.add('q--missing');
+          missing++;
+          return;
+        }
+        q.classList.remove('q--missing');
+        if (checked.value === 'nao') attention.push(q.getAttribute('data-topic'));
+      });
+
+      if (missing > 0) {
+        if (hint) hint.hidden = false;
+        var firstMissing = form.querySelector('.q--missing');
+        if (firstMissing) {
+          firstMissing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          var input = firstMissing.querySelector('input');
+          if (input) input.focus();
+        }
+        return;
+      }
+      if (hint) hint.hidden = true;
+
+      renderChecklistResult(attention.length, attention, result);
+      sendEvent('score-' + attention.length, 'checklist', 'checklist_result');
+    });
+
+    // Limpa o destaque de "faltando" assim que a pergunta é respondida.
+    form.querySelectorAll('.q input[type="radio"]').forEach(function (input) {
+      input.addEventListener('change', function () {
+        var q = input.closest('.q');
+        if (q) q.classList.remove('q--missing');
+      });
+    });
+
+    if (restart) {
+      restart.addEventListener('click', function () {
+        form.reset();
+        questions.forEach(function (q) { q.classList.remove('q--missing'); });
+        result.classList.add('is-hidden');
+        if (hint) hint.hidden = true;
+        var topo = document.getElementById('conteudo') || form;
+        topo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
+
+  function renderChecklistResult(score, attention, result) {
+    var band = checklistBand(score);
+
+    var num = document.getElementById('checklist-score-num');
+    if (num) num.textContent = String(score);
+
+    // "ponto" no singular quando for exatamente 1.
+    var unit = result.querySelector('.checklist__score-unit');
+    if (unit) unit.textContent = score === 1 ? 'ponto de atenção' : 'pontos de atenção';
+
+    var bandEl = document.getElementById('checklist-band');
+    if (bandEl) bandEl.textContent = band.title;
+    var descEl = document.getElementById('checklist-band-desc');
+    if (descEl) descEl.textContent = band.desc;
+
+    // Lista dos temas marcados como "não" — o que qualifica a conversa.
+    var pointsBox = document.getElementById('checklist-points');
+    var pointsList = document.getElementById('checklist-points-list');
+    if (pointsBox && pointsList) {
+      pointsList.textContent = '';
+      if (attention.length) {
+        attention.forEach(function (topic) {
+          var li = document.createElement('li');
+          li.textContent = topic;
+          pointsList.appendChild(li);
+        });
+        pointsBox.hidden = false;
+      } else {
+        pointsBox.hidden = true;
+      }
+    }
+
+    // Mensagem do WhatsApp já preenchida com o resultado — chega uma conversa
+    // qualificada ("marquei X pontos, incluindo backup e failover").
+    var wa = document.getElementById('checklist-wa');
+    if (wa) {
+      var lines = [
+        'Olá! Fiz a autoavaliação de infraestrutura no site da Olivia Tech.',
+        'Resultado: ' + score + (score === 1 ? ' ponto de atenção.' : ' pontos de atenção.')
+      ];
+      if (attention.length) {
+        lines.push('', 'Pontos que marquei para melhorar:');
+        attention.forEach(function (topic) { lines.push('- ' + topic); });
+      }
+      lines.push('', 'Gostaria de uma conversa inicial sobre isso.');
+      wa.setAttribute('href', 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines.join('\n')));
+    }
+
+    result.classList.remove('is-hidden');
+    result.focus();
+    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   // --- helpers ------------------------------------------------------------
